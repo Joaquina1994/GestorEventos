@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "3WuO+I95MNjLr5Zk0W1UcsoyW/evmq0QvNsGzJdVn6M=",
+  "Source": "GestorEventos.Api",
+  "BasePath": "_content/GestorEventos.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
