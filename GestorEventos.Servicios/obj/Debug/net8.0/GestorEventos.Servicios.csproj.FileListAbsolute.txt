@@ -11,3 +11,16 @@ C:\Users\jota_\source\repos\GestorEventos.Api\GestorEventos.Servicios\obj\Debug\
 C:\Users\jota_\source\repos\GestorEventos.Api\GestorEventos.Servicios\obj\Debug\net8.0\ref\GestorEventos.Servicios.dll
 C:\Users\jota_\source\repos\GestorEventos.Api\GestorEventos.Servicios\obj\Debug\net8.0\GestorEventos.Servicios.sourcelink.json
 C:\Users\jota_\source\repos\GestorEventos.Api\GestorEventos.Servicios\obj\Debug\net8.0\GestorEventos.Servicios.csproj.AssemblyReference.cache
+C:\Users\jota_\source\repos\GestorEventos\GestorEventos.Servicios\bin\Debug\net8.0\GestorEventos.Servicios.deps.json
+C:\Users\jota_\source\repos\GestorEventos\GestorEventos.Servicios\bin\Debug\net8.0\GestorEventos.Servicios.dll
+C:\Users\jota_\source\repos\GestorEventos\GestorEventos.Servicios\bin\Debug\net8.0\GestorEventos.Servicios.pdb
+C:\Users\jota_\source\repos\GestorEventos\GestorEventos.Servicios\obj\Debug\net8.0\GestorEventos.Servicios.csproj.AssemblyReference.cache
+C:\Users\jota_\source\repos\GestorEventos\GestorEventos.Servicios\obj\Debug\net8.0\GestorEventos.Servicios.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jota_\source\repos\GestorEventos\GestorEventos.Servicios\obj\Debug\net8.0\GestorEventos.Servicios.AssemblyInfoInputs.cache
+C:\Users\jota_\source\repos\GestorEventos\GestorEventos.Servicios\obj\Debug\net8.0\GestorEventos.Servicios.AssemblyInfo.cs
+C:\Users\jota_\source\repos\GestorEventos\GestorEventos.Servicios\obj\Debug\net8.0\GestorEventos.Servicios.csproj.CoreCompileInputs.cache
+C:\Users\jota_\source\repos\GestorEventos\GestorEventos.Servicios\obj\Debug\net8.0\GestorEventos.Servicios.sourcelink.json
+C:\Users\jota_\source\repos\GestorEventos\GestorEventos.Servicios\obj\Debug\net8.0\GestorEventos.Servicios.dll
+C:\Users\jota_\source\repos\GestorEventos\GestorEventos.Servicios\obj\Debug\net8.0\refint\GestorEventos.Servicios.dll
+C:\Users\jota_\source\repos\GestorEventos\GestorEventos.Servicios\obj\Debug\net8.0\GestorEventos.Servicios.pdb
+C:\Users\jota_\source\repos\GestorEventos\GestorEventos.Servicios\obj\Debug\net8.0\ref\GestorEventos.Servicios.dll
