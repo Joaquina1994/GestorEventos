@@ -8,19 +8,28 @@ namespace GestorEventos.Api.Controllers
     [Route("api/[controller]")]
     public class ServiciosController : ControllerBase
     {
+
+        private IServiciosService serviciosService;
+
+        // constructor
+        public ServiciosController(IServiciosService _servicioService)
+        {
+            serviciosService = _servicioService;
+        }
+
+        // devuelve todos los servicios
         [HttpGet]
         public IActionResult GetServicios()
         {
-            ServiciosService serviciosService = new ServiciosService();
+            
 
             return Ok(serviciosService.GetServicios());
         }
 
+        // devuelve un servicio segun su id
         [HttpGet("{idServicio:int}")]
-
         public IActionResult GetServicioPorId(int idServicio)
-        {
-            ServiciosService serviciosService = new ServiciosService();
+        {         
             var servicio = serviciosService.GetServiciosPorId(idServicio);
 
             if (servicio == null)
@@ -33,10 +42,11 @@ namespace GestorEventos.Api.Controllers
             }
         }
 
+        // sube un nuevo servicio
         [HttpPost("nuevo")]
         public IActionResult PostNuevoServicio([FromBody] ServiciosVM servicioNuevo)
         {
-            ServiciosService serviciosService = new ServiciosService();
+            
             serviciosService.AgregarServicio(servicioNuevo);
 
             return Ok();   

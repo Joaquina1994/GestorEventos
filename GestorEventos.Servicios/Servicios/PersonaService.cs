@@ -5,7 +5,16 @@ using System.Data.SqlClient;
 
 namespace GestorEventos.Servicios.Servicios
 {
-    public class PersonaService
+    public interface IPersonaService
+    {
+        int AgregarNuevaPersona(Persona persona);
+        bool BorrarLogicamentePersona(int idPersona);
+        IEnumerable<Persona> GetPersonaDePrueba();
+        Persona? GetPersonaDePruebaSegunId(int IdPersona);
+        bool ModificarPersona(int idPersona, Persona persona);
+    }
+
+    public class PersonaService : IPersonaService
     {
         // IEnumerable establece que es una lista de entidades
         //public IEnumerable<Persona> PersonaDePrueba {  get; set; }
@@ -16,8 +25,8 @@ namespace GestorEventos.Servicios.Servicios
         public PersonaService()
         {
             _connectionString = "Server=localhost\\SQLEXPRESS;Database=master;Trusted_Connection=True;";
-            
-            
+
+
             /*PersonaDePrueba = new List<Persona>
             {
                 new Persona{IdPersona = 1, Nombre = "Joaquina", Apellido = "Aguilar", Direccion = "Chacabuco 1400", Email = "jota@gmail.com", Telefono = "11111"},
@@ -28,7 +37,7 @@ namespace GestorEventos.Servicios.Servicios
         }
 
         // consulta sobre persona
-        public IEnumerable<Persona> GetPersonaDePrueba() 
+        public IEnumerable<Persona> GetPersonaDePrueba()
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
@@ -49,15 +58,15 @@ namespace GestorEventos.Servicios.Servicios
                 return personas;
             }
 
-                /*try
-                {
-                    Persona persona = PersonaDePrueba.Where(x => x.IdPersona == IdPersona).First();
-                    return persona;
-                }
-                catch (Exception ex)
-                {
-                    return null;
-                }*/
+            /*try
+            {
+                Persona persona = PersonaDePrueba.Where(x => x.IdPersona == IdPersona).First();
+                return persona;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }*/
         }
 
         public int AgregarNuevaPersona(Persona persona)
@@ -73,7 +82,7 @@ namespace GestorEventos.Servicios.Servicios
 
         public bool ModificarPersona(int idPersona, Persona persona)
         {
-            using (IDbConnection db=new SqlConnection(_connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 string query = "UPDATE Personas SET Nombre= @Nombre, Apellido= @Apellido, Direccion= @Direccion, Telefono= @Telefono, Email= @Email WHERE IdPersona = " + idPersona.ToString();
                 db.Execute(query, persona);
@@ -83,14 +92,14 @@ namespace GestorEventos.Servicios.Servicios
         }
 
         //metodo que cambia el valor de Borrado
-        
-        public bool BorrarLogicamentePersona (int idPersona)
+
+        public bool BorrarLogicamentePersona(int idPersona)
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 string query = "UPDATE Personas SET Borrado = 1 WHERE IdPersona = " + idPersona.ToString();
                 db.Execute(query);
-                return true;    
+                return true;
             }
         }
     }

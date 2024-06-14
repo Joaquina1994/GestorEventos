@@ -6,7 +6,18 @@ using System.Data.SqlClient;
 
 namespace GestorEventos.Servicios.Servicios
 {
-    public class ServiciosService
+    public interface IServiciosService
+    {
+        IEnumerable<ServiciosVM> Servicios { get; set; }
+
+        bool AgregarServicio(ServiciosVM servicios);
+        bool BorradoLogicoServicio(int IdServicio);
+        IEnumerable<ServiciosVM> GetServicios();
+        ServiciosVM GetServiciosPorId(int IdServicio);
+        bool ModificarServicio(int IdServicio, ServiciosVM servicios);
+    }
+
+    public class ServiciosService : IServiciosService
     {
         public IEnumerable<ServiciosVM> Servicios { get; set; }
 
@@ -25,13 +36,13 @@ namespace GestorEventos.Servicios.Servicios
 
         public IEnumerable<ServiciosVM> GetServicios()
         {
-            using (IDbConnection db = new SqlConnection(_connectionString)) 
+            using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 List<ServiciosVM> servicios = db.Query<ServiciosVM>("SELECT * FROM Servicios WHERE Borrado = 0").ToList();
                 return servicios;
-            }   
+            }
 
-            
+
         }
 
         public ServiciosVM GetServiciosPorId(int IdServicio)
@@ -93,7 +104,7 @@ namespace GestorEventos.Servicios.Servicios
         public bool ModificarServicio(int IdServicio, ServiciosVM servicios)
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
-            
+
             {
                 string query = "UPDATE Servicios SET Descripcion = @Descripcion, PrecioServicio = @PrecioServicio WHERE IdServicio = " + IdServicio.ToString();
                 db.Execute(query, servicios);
@@ -104,7 +115,7 @@ namespace GestorEventos.Servicios.Servicios
         public bool BorradoLogicoServicio(int IdServicio)
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
-            
+
             {
                 string query = "UPDATE Servicios SET Borrado = 1 WHERE IdServicio = " + IdServicio.ToString();
                 db.Execute(query);

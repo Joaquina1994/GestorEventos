@@ -8,21 +8,26 @@ namespace GestorEventos.Api.Controllers
     [Route("[controller]")]
     public class PersonaController : Controller
     {
+        private IPersonaService personaService;
+
+        // constructor
+        public PersonaController(IPersonaService _personaService) 
+        { 
+            personaService = _personaService;
+        }
+
         // trae lista de personas
         [HttpGet]
         public IActionResult Get()
-        {
-            PersonaService personaService = new PersonaService();
+        {    
             return Ok(personaService.GetPersonaDePrueba());
         }
 
-        // trae una persona
+        // trae una persona segun su id
         [HttpGet("{idPersona:int}")]
-
         public IActionResult GetPersonaPorId(int idPersona)
         {
-            PersonaService personaService= new PersonaService();
-            Persona persona = personaService.GetPersonaDePruebaSegunId(idPersona);
+            var persona = this.personaService.GetPersonaDePruebaSegunId(idPersona); 
 
             if(persona == null)
             {
@@ -33,29 +38,28 @@ namespace GestorEventos.Api.Controllers
             }
         }
 
+        // agrega una persona
         [HttpPost]
         public IActionResult PostPersona([FromBody] Persona persona)
         {
-            PersonaService personaService = new PersonaService();
-
             personaService.AgregarNuevaPersona(persona);
 
             return Ok();
         }
 
+        // modifica una persona
         [HttpPut("{idPersona:int}")]
         public IActionResult PutPersona(int idPersona, [FromBody] Persona persona)
         {
-            PersonaService personaService = new PersonaService();
             personaService.ModificarPersona(idPersona, persona);
 
             return Ok();
         }
 
+        // hace un borrado logico de una persona segun su id
         [HttpPatch("BorradoLogico/{idPersona:int}")]
         public IActionResult BorradoLogicoPersona(int idPersona)
-        {
-            PersonaService personaService = new PersonaService();
+        { 
             personaService.BorrarLogicamentePersona(idPersona);
             return Ok();
         }

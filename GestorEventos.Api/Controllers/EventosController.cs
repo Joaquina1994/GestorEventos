@@ -9,6 +9,14 @@ namespace GestorEventos.Api.Controllers
     [ApiController]
     public class EventosController : ControllerBase
     {
+        private IEventosService eventosService;
+
+        // constructor
+        public EventosController(IEventosService _eventosService)
+        {
+            eventosService = _eventosService;
+        }
+
         [HttpGet]
         public IActionResult GetEventos()
         {

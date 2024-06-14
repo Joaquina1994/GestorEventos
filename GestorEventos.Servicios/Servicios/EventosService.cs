@@ -7,7 +7,19 @@ using System.Threading.Tasks;
 
 namespace GestorEventos.Servicios.Servicios
 {
-    public class EventosService
+    public interface IEventosService
+    {
+        IEnumerable<Eventos> Eventos { get; set; }
+
+        bool DeleteEvento(int idEvento);
+        IEnumerable<Eventos> GetAllEventos();
+        Eventos GetEventoPorId(int IdEvento);
+        bool PostNuevoEvento(Eventos eventos);
+        void PostNuevoEventoCompleto(EventoModel eventoModel);
+        bool PutNuevoEvento(int idEvento, Eventos eventos);
+    }
+
+    public class EventosService : IEventosService
     {
 
         public IEnumerable<Eventos> Eventos { get; set; }
@@ -19,7 +31,7 @@ namespace GestorEventos.Servicios.Servicios
                 new Eventos {IdEvento = 1, CantPersonas = 5, FechaEvento = DateTime.Now, IdPersonaAgasajada = 1, IdPersonaContacto = 1, IdTipoDespedida = 2, NombreEvento= "Evento de despedidas Diego", Visible= true},
                 new Eventos { IdEvento = 2, CantPersonas = 10, FechaEvento = DateTime.Now, IdPersonaAgasajada = 3, IdPersonaContacto = 2, IdTipoDespedida = 1, NombreEvento = "Evento de despedidas Juana", Visible= true }
             };
-                                  
+
         }
 
         public IEnumerable<Eventos> GetAllEventos()
@@ -48,14 +60,14 @@ namespace GestorEventos.Servicios.Servicios
                 lista.Add(eventos);
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return false;
-            } 
-            
+            }
+
         }
 
-        public bool PutNuevoEvento( int idEvento, Eventos eventos)
+        public bool PutNuevoEvento(int idEvento, Eventos eventos)
         {
             try
             {
@@ -69,18 +81,19 @@ namespace GestorEventos.Servicios.Servicios
 
                 return true;
 
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return false;
             }
-            
+
         }
 
         public bool DeleteEvento(int idEvento)
         {
             try
             {
-                
+
                 var eventoAEliminar = this.Eventos.Where(x => x.IdEvento == idEvento).First();
                 var listaEventos = this.Eventos.ToList();
 
@@ -93,8 +106,9 @@ namespace GestorEventos.Servicios.Servicios
 
 
                 return true;
-                
-            }catch(Exception ex)
+
+            }
+            catch (Exception ex)
             {
                 return false;
             }
@@ -112,7 +126,7 @@ namespace GestorEventos.Servicios.Servicios
 
             this.PostNuevoEvento(eventoModel.evento);
 
-            foreach(ServiciosVM servicio in eventoModel.ListaDeServiciosContratados)
+            foreach (ServiciosVM servicio in eventoModel.ListaDeServiciosContratados)
             {
                 ServiciosService serviciosService = new ServiciosService();
                 serviciosService.AgregarServicio(servicio);
