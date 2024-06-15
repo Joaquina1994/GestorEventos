@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GestorEventos.WebUsuario")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+54c6a1273de2008b031bd89c30f81fae873745af")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0225b6b828026d28946bd00a4f5a0d055ca08be2")]
 [assembly: System.Reflection.AssemblyProductAttribute("GestorEventos.WebUsuario")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GestorEventos.WebUsuario")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

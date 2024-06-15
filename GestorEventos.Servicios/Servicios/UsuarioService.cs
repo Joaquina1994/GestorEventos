@@ -73,7 +73,7 @@ namespace GestorEventos.Servicios.Servicios
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string query = "INSERT INTO Usuarios (GoogleIdentificador, Nombre, Apellido, NombreCompleto,  Email) VALUES ( @GoogleIdentificador, @Nombre, @Apellido, @NombreCompleto, @Email); SELECT CAST(SCOPE_IDENTITY() AS int)";
+                string query = "INSERT INTO Usuarios (Nombre, Apellido,  Email) VALUES (@Nombre, @Apellido, @Email); SELECT CAST(SCOPE_IDENTITY() AS int)";
                 int idUsuario = (int)db.ExecuteScalar(query, usuario);
 
 
