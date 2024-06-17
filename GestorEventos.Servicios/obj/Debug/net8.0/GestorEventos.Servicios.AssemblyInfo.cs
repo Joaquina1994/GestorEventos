@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GestorEventos.Servicios")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0225b6b828026d28946bd00a4f5a0d055ca08be2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+73432a91af78865c7f52663c6dcaf860f98d8621")]
 [assembly: System.Reflection.AssemblyProductAttribute("GestorEventos.Servicios")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GestorEventos.Servicios")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,9 +1,12 @@
 ﻿using GestorEventos.Servicios.Entidades;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dapper;
 
 namespace GestorEventos.Servicios.Servicios
 {
@@ -14,37 +17,52 @@ namespace GestorEventos.Servicios.Servicios
         bool DeleteEvento(int idEvento);
         IEnumerable<Eventos> GetAllEventos();
         Eventos GetEventoPorId(int IdEvento);
-        bool PostNuevoEvento(Eventos eventos);
-        void PostNuevoEventoCompleto(EventoModel eventoModel);
+        int PostNuevoEvento(Eventos eventos);
+        //void PostNuevoEventoCompleto(EventoModel eventoModel);
         bool PutNuevoEvento(int idEvento, Eventos eventos);
     }
 
     public class EventosService : IEventosService
     {
+        private string _connectionString;
 
-        public IEnumerable<Eventos> Eventos { get; set; }
+
 
         public EventosService()
         {
-            Eventos = new List<Eventos>
-            {
-                new Eventos {IdEvento = 1, CantPersonas = 5, FechaEvento = DateTime.Now, IdPersonaAgasajada = 1, IdPersonaContacto = 1, IdTipoDespedida = 2, NombreEvento= "Evento de despedidas Diego", Visible= true},
-                new Eventos { IdEvento = 2, CantPersonas = 10, FechaEvento = DateTime.Now, IdPersonaAgasajada = 3, IdPersonaContacto = 2, IdTipoDespedida = 1, NombreEvento = "Evento de despedidas Juana", Visible= true }
-            };
+
+            //Connection string 
+            _connectionString = "Server=localhost\\SQLEXPRESS;Database=master;Trusted_Connection=True;";
+
 
         }
 
+        public IEnumerable<Eventos> Eventos { get; set; }
+
+        
+
         public IEnumerable<Eventos> GetAllEventos()
         {
-            return Eventos.Where(x => x.Visible == true); // consulta a la base
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                List<Eventos> eventos = db.Query<Eventos>("SELECT * FROM Eventos WHERE Borrado = 0").ToList();
+
+                return eventos;
+
+            }
         }
 
         public Eventos GetEventoPorId(int IdEvento)
         {
             try
             {
-                Eventos eventos = Eventos.Where(x => x.IdEvento == IdEvento).First();
-                return eventos;
+                using(IDbConnection db = new SqlConnection(_connectionString))
+                {
+                    Eventos eventos = db.Query<Eventos>("SELECT * FROM Eventos WHERE Borrado = 0").First();
+
+                    return eventos;
+
+                }
             }
             catch (Exception ex)
             {
@@ -52,17 +70,26 @@ namespace GestorEventos.Servicios.Servicios
             }
         }
 
-        public bool PostNuevoEvento(Eventos eventos)
+        public int PostNuevoEvento(Eventos eventos)
         {
             try
             {
-                List<Eventos> lista = this.Eventos.ToList();
-                lista.Add(eventos);
-                return true;
+                using (IDbConnection db = new SqlConnection(_connectionString))
+                {
+                    string query = "INSERT INTO Eventos (NombreEvento, FechaEvento, CantidadPersonas, IdPersonaAgasajada, IdTipoEvento, Visible, Borrado, IdUsuario, IdEstadoEvento) VALUES ( @NombreEvento, @FechaEvento, @CantidadPersonas, @IdPersonaAgasajada, @IdTipoEvento, @Visible, @Borrado, @IdUsuario, @IdEstadoEvento);" +
+                    "SELECT  CAST(SCOPE_IDENTITY() AS INT) ";
+                    eventos.IdEvento = db.QuerySingle<int>(query, eventos);
+                    //db.QuerySingle(query, evento);
+
+
+                    return eventos.IdEvento;
+                }
+
             }
+            
             catch (Exception ex)
             {
-                return false;
+                return 0;
             }
 
         }
@@ -71,12 +98,20 @@ namespace GestorEventos.Servicios.Servicios
         {
             try
             {
+                return true;
+            }
+            catch (Exception ex) 
+            {
+                return false;
+            }
+            /*try
+            {
                 var eventoDeLista = this.Eventos.Where(x => x.IdEvento == idEvento).First();
 
                 eventoDeLista.FechaEvento = eventoDeLista.FechaEvento;
                 eventoDeLista.NombreEvento = eventoDeLista.NombreEvento;
                 eventoDeLista.CantPersonas = eventoDeLista.CantPersonas;
-                eventoDeLista.IdPersonaContacto = eventoDeLista.IdPersonaContacto;
+                eventoDeLista.IdUsuario = eventoDeLista.IdUsuario;
                 eventoDeLista.IdPersonaAgasajada = eventoDeLista.IdPersonaAgasajada;
 
                 return true;
@@ -85,13 +120,21 @@ namespace GestorEventos.Servicios.Servicios
             catch (Exception ex)
             {
                 return false;
-            }
+            }*/
 
         }
 
         public bool DeleteEvento(int idEvento)
         {
             try
+            {
+                return true;
+            }
+            catch (Exception ex)
+            { 
+                return false ;  
+            }
+            /*try
             {
 
                 var eventoAEliminar = this.Eventos.Where(x => x.IdEvento == idEvento).First();
@@ -111,27 +154,34 @@ namespace GestorEventos.Servicios.Servicios
             catch (Exception ex)
             {
                 return false;
-            }
+            }*/
         }
 
-        public void PostNuevoEventoCompleto(EventoModel eventoModel)
+        /*public void PostNuevoEventoCompleto(EventoModel eventoModel)
         {
             PersonaService personaService = new PersonaService();
             int idPersonaAgasajada = personaService.AgregarNuevaPersona(eventoModel.PersonaAgasajada);
-            int idPersonaDeContacto = personaService.AgregarNuevaPersona(eventoModel.PersonaContacto);
+            //int idPersonaDeContacto = personaService.AgregarNuevaPersona(eventoModel.PersonaContacto);
 
-            eventoModel.evento.IdPersonaAgasajada = idPersonaAgasajada;
-            eventoModel.evento.IdPersonaContacto = idPersonaDeContacto;
-            eventoModel.evento.Visible = true;
+            eventoModel.Eventos.IdPersonaAgasajada = idPersonaAgasajada;
+            //eventoModel.evento.IdPersonaContacto = idPersonaDeContacto;
+            eventoModel.Eventos.Visible = true;
 
-            this.PostNuevoEvento(eventoModel.evento);
+            this.PostNuevoEvento(eventoModel.Eventos);
 
-            foreach (ServiciosVM servicio in eventoModel.ListaDeServiciosContratados)
+            foreach (EventosServicios servicio in eventoModel.ListaDeServiciosContratados)
             {
                 ServiciosService serviciosService = new ServiciosService();
                 serviciosService.AgregarServicio(servicio);
             }
 
+
+            /*foreach (ServiciosVM servicio in eventoModel.ListaDeServiciosContratados)
+            {
+                ServiciosService serviciosService = new ServiciosService();
+                serviciosService.AgregarServicio(servicio);
+            }*/
+
         }
     }
-}
+

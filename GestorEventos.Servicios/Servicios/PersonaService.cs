@@ -74,7 +74,7 @@ namespace GestorEventos.Servicios.Servicios
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
 
-                string query = "INSERT INTO Personas (Nombre, Apellido, Direccion, Telefono, Email) VALUES (@Nombre, @Apellido, @Direccion, @Telefono, @Email ); SELECT Inserted.IdPersona";
+                string query = "INSERT INTO Personas (Nombre, Apellido, Direccion, Telefono, Email) VALUES (@Nombre, @Apellido, @Direccion, @Telefono, @Email )";
                 db.Execute(query, persona);
                 return persona.IdPersona;
             }
