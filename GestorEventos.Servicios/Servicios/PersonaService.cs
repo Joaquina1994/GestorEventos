@@ -74,7 +74,7 @@ namespace GestorEventos.Servicios.Servicios
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
 
-                string query = "INSERT INTO Persona (Nombre, Apellido, Direccion, Telefono, Email) VALUES (@Nombre, @Apellido, @Direccion, @Telefono, @Email )";
+                string query = "INSERT INTO Persona (Nombre, Apellido, Direccion, Telefono, Email, Borrado) VALUES (@Nombre, @Apellido, @Direccion, @Telefono, @Email, @Borrado )";
                 db.Execute(query, persona);
                 return persona.IdPersona;
             }
@@ -84,7 +84,7 @@ namespace GestorEventos.Servicios.Servicios
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string query = "UPDATE Persona SET Nombre= @Nombre, Apellido= @Apellido, Direccion= @Direccion, Telefono= @Telefono, Email= @Email WHERE IdPersona = " + idPersona.ToString();
+                string query = "UPDATE Persona SET Nombre= @Nombre, Apellido= @Apellido, Direccion= @Direccion, Telefono= @Telefono, Email= @Email, Borrado=@Borrado WHERE IdPersona = " + idPersona.ToString();
                 db.Execute(query, persona);
 
                 return true;

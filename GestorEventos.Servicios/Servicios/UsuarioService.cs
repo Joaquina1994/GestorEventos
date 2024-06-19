@@ -37,7 +37,7 @@ namespace GestorEventos.Servicios.Servicios
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                List<Usuario> usuarios = db.Query<Usuario>("SELECT * FROM Usuarios").ToList();
+                List<Usuario> usuarios = db.Query<Usuario>("SELECT * FROM Usuario").ToList();
 
                 return usuarios;
 
@@ -51,7 +51,7 @@ namespace GestorEventos.Servicios.Servicios
 
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                Usuario usuarios = db.Query<Usuario>("SELECT * FROM Usuarios WHERE IdUsuario = " + IdUsuario.ToString()).FirstOrDefault();
+                Usuario usuarios = db.Query<Usuario>("SELECT * FROM Usuario WHERE IdUsuario = " + IdUsuario.ToString()).FirstOrDefault();
 
                 return usuarios;
             }
@@ -64,7 +64,7 @@ namespace GestorEventos.Servicios.Servicios
 
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                Usuario usuarios = db.Query<Usuario>("SELECT * FROM Usuarios WHERE GoogleIdentificador = '" + googleSubject.ToString() + "'").FirstOrDefault();
+                Usuario usuarios = db.Query<Usuario>("SELECT * FROM Usuario WHERE GoogleIdentificador = '" + googleSubject.ToString() + "'").FirstOrDefault();
 
                 return usuarios;
             }
@@ -73,7 +73,7 @@ namespace GestorEventos.Servicios.Servicios
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string query = "INSERT INTO Usuarios (Nombre, Apellido,  Email) VALUES (@Nombre, @Apellido, @Email); SELECT CAST(SCOPE_IDENTITY() AS int)";
+                string query = "INSERT INTO Usuario (Nombre, Apellido,  Email) VALUES (@Nombre, @Apellido, @Email); SELECT CAST(SCOPE_IDENTITY() AS int)";
                 int idUsuario = (int)db.ExecuteScalar(query, usuario);
 
 

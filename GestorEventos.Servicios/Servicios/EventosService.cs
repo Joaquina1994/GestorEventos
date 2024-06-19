@@ -17,6 +17,7 @@ namespace GestorEventos.Servicios.Servicios
         bool DeleteEvento(int idEvento);
         IEnumerable<Eventos> GetAllEventos();
         IEnumerable<EventoViewModel> GetAllEventosViewModel();
+        IEnumerable<EventoViewModel> GetMisEventos(int IdUsuario);
         Eventos GetEventoPorId(int IdEvento);
         int PostNuevoEvento(Eventos eventos);
         //void PostNuevoEventoCompleto(EventoModel eventoModel);
@@ -60,6 +61,17 @@ namespace GestorEventos.Servicios.Servicios
 
             }
         }
+        public IEnumerable<EventoViewModel> GetMisEventos(int idUsuario)
+        {
+
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                List<EventoViewModel> eventos = db.Query<EventoViewModel>("SELECT Eventos.*, EstadoEventos.Descripcion EstadoEvento FROM Eventos LEFT JOIN EstadoEventos ON EstadoEventos.IdEstadoEvento = Eventos.idEstadoEvento WHERE Eventos.IdUsuario =" + idUsuario.ToString()).ToList();
+
+                return eventos;
+
+            }
+        }
 
         public Eventos GetEventoPorId(int IdEvento)
         {
@@ -79,7 +91,7 @@ namespace GestorEventos.Servicios.Servicios
             }
         }
 
-        public int PostNuevoEvento(Eventos eventos)
+        /*public int PostNuevoEvento(Eventos eventos)
         {
             try
             {
@@ -101,7 +113,28 @@ namespace GestorEventos.Servicios.Servicios
                 return 0;
             }
 
+        }*/
+        public int PostNuevoEvento(Eventos eventos)
+        {
+            try
+            {
+                using (IDbConnection db = new SqlConnection(_connectionString))
+                {
+                    string query = @"INSERT INTO Eventos (NombreEvento, FechaEvento, CantidadPersonas, IdPersonaAgasajada, IdTipoEvento, Visible, IdUsuario, IdEstadoEvento, Borrado)
+                             VALUES (@NombreEvento, @FechaEvento, @CantidadPersonas, @IdPersonaAgasajada, @IdTipoEvento, @Visible, @IdUsuario, @IdEstadoEvento, @Borrado);
+                             SELECT CAST(SCOPE_IDENTITY() AS INT);";
+
+                    eventos.IdEvento = db.QuerySingle<int>(query, eventos);
+                    return eventos.IdEvento;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                throw; // O puedes registrar el error y retornar 0 como lo tenías antes
+            }
         }
+
 
         /*public int PostNuevoEvento(Eventos eventos)
         {
