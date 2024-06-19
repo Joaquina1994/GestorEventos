@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GestorEventos.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+73432a91af78865c7f52663c6dcaf860f98d8621")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d55ca8750242a9fa3166abcd2a0f59ce5d7b2c50")]
 [assembly: System.Reflection.AssemblyProductAttribute("GestorEventos.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GestorEventos.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

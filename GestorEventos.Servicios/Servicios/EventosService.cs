@@ -12,10 +12,11 @@ namespace GestorEventos.Servicios.Servicios
 {
     public interface IEventosService
     {
-        IEnumerable<Eventos> Eventos { get; set; }
+       
 
         bool DeleteEvento(int idEvento);
         IEnumerable<Eventos> GetAllEventos();
+        IEnumerable<EventoViewModel> GetAllEventosViewModel();
         Eventos GetEventoPorId(int IdEvento);
         int PostNuevoEvento(Eventos eventos);
         //void PostNuevoEventoCompleto(EventoModel eventoModel);
@@ -32,20 +33,28 @@ namespace GestorEventos.Servicios.Servicios
         {
 
             //Connection string 
-            _connectionString = "Server=localhost\\SQLEXPRESS;Database=master;Trusted_Connection=True;";
+            _connectionString = "Server=localhost\\SQLEXPRESS;Database=GestorEventos;Trusted_Connection=True;";
 
 
         }
 
-        public IEnumerable<Eventos> Eventos { get; set; }
-
-        
-
+ 
         public IEnumerable<Eventos> GetAllEventos()
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 List<Eventos> eventos = db.Query<Eventos>("SELECT * FROM Eventos WHERE Borrado = 0").ToList();
+
+                return eventos;
+
+            }
+        }
+
+        public IEnumerable<EventoViewModel> GetAllEventosViewModel()
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                List<EventoViewModel> eventos = db.Query<EventoViewModel>("SELECT Eventos.*, EstadoEventos.Descripcion EstadoEvento FROM Eventos LEFT JOIN EstadoEventos on EstadoEventos.IdEstadoEvento = Eventos.idEstadoEvento").ToList();
 
                 return eventos;
 
@@ -76,7 +85,7 @@ namespace GestorEventos.Servicios.Servicios
             {
                 using (IDbConnection db = new SqlConnection(_connectionString))
                 {
-                    string query = "INSERT INTO Eventos (NombreEvento, FechaEvento, CantidadPersonas, IdPersonaAgasajada, IdTipoEvento, Visible, Borrado, IdUsuario, IdEstadoEvento) VALUES ( @NombreEvento, @FechaEvento, @CantidadPersonas, @IdPersonaAgasajada, @IdTipoEvento, @Visible, @Borrado, @IdUsuario, @IdEstadoEvento);" +
+                    string query = "INSERT INTO Eventos (NombreEvento, FechaEvento, CantidadPersonas, IdPersonaAgasajada, IdTipoEvento, Visible, IdUsuario, IdEstadoEvento, Borrado) VALUES ( @NombreEvento, @FechaEvento, @CantidadPersonas, @IdPersonaAgasajada, @IdTipoEvento, @Visible, @IdUsuario, @IdEstadoEvento, @Borrado);" +
                     "SELECT  CAST(SCOPE_IDENTITY() AS INT) ";
                     eventos.IdEvento = db.QuerySingle<int>(query, eventos);
                     //db.QuerySingle(query, evento);
@@ -93,6 +102,30 @@ namespace GestorEventos.Servicios.Servicios
             }
 
         }
+
+        /*public int PostNuevoEvento(Eventos eventos)
+        {
+            try
+            {
+                using (IDbConnection db = new SqlConnection(_connectionString))
+                {
+                    string query = @"INSERT INTO Eventos (NombreEvento, FechaEvento, CantidadPersonas, IdPersonaAgasajada, IdTipoEvento, Visible, IdUsuario, IdEstadoEvento, Borrado) 
+                             VALUES (@NombreEvento, @FechaEvento, @CantidadPersonas, @IdPersonaAgasajada, @IdTipoEvento, @Visible, @IdUsuario, @IdEstadoEvento, @Borrado);
+                             SELECT CAST(SCOPE_IDENTITY() AS INT);";
+
+                    eventos.IdEvento = db.QuerySingle<int>(query, eventos);
+
+                    return eventos.IdEvento;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Aquí podrías registrar el error para depuración
+                Console.WriteLine(ex.Message);
+                return 0;
+            }
+        }*/
+
 
         public bool PutNuevoEvento(int idEvento, Eventos eventos)
         {

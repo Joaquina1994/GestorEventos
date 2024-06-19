@@ -25,7 +25,7 @@ namespace GestorEventos.Servicios.Servicios
 
         public ServiciosService()
         {
-            _connectionString = "Server=localhost\\SQLEXPRESS;Database=master;Trusted_Connection=True;";
+            _connectionString = "Server=localhost\\SQLEXPRESS;Database=GestorEventos;Trusted_Connection=True;";
 
 
             /*new ServiciosVM { IdServicio = 1, Descripcion = "Bar Hopping", PrecioUnitario = 10000 };

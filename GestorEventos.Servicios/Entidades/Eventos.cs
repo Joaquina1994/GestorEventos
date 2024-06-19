@@ -2,21 +2,21 @@
 {
     public class Eventos
     {
-
-        /*IdEvento, Nombre, FechaEvento, CantPersonas, IdTipoDespedida, 
-         * IdPersonaAgasajada, IdPersonaContacto*/
         public int IdEvento { get; set; }
         public string NombreEvento { get; set; }
-
         public DateTime FechaEvento { get; set; }
-        public int CantPersonas { get; set; }
-        public int IdTipoDespedida { get; set; }
+        public int CantidadPersonas { get; set; }
         public int IdPersonaAgasajada { get; set; }
-
+        public int IdTipoEvento { get; set; }
+        public bool Visible { get; set; }
         public int IdUsuario { get; set; }
+        public int IdEstadoEvento { get; set; }
+        public int Borrado { get; set; }
+    }
 
-        public bool Visible {  get; set; }  
-
+    public class EventoViewModel : Eventos
+    {
+        public string EstadoEvento { get; set; }
     }
 
     public class EventoModel : Eventos // herencia simple, hereda de Eventos

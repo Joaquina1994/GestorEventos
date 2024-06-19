@@ -27,7 +27,7 @@ namespace GestorEventos.Servicios.Servicios
         {
 
             //Connection string 
-            _connectionString = "Server=localhost\\SQLEXPRESS;Database=master;Trusted_Connection=True;";
+            _connectionString = "Server=localhost\\SQLEXPRESS;Database=GestorEventos;Trusted_Connection=True;";
 
 
 

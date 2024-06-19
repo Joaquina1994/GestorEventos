@@ -1,67 +1,98 @@
-﻿using GestorEventos.Servicios.Entidades;
+﻿//CODIGO DEL PROFESOR
+
+using GestorEventos.Servicios.Entidades;
 using GestorEventos.Servicios.Servicios;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GestorEventos.WebAdmin.Controllers
+namespace GestorEventos.WebUsuario.Controllers
 {
     public class EventosController : Controller
     {
-        private IEventosService eventosService;
+        private IEventosService eventoService;
         private IPersonaService personaService;
 
-        public EventosController(IEventosService _eventosService, IPersonaService personaService)
+        public EventosController(IEventosService _eventoService, IPersonaService _personaService)
         {
-            this.eventosService = _eventosService;
-            this.personaService = personaService;
-            
-        }
-        // GET: EventosController1
-        public ActionResult Index()
-        {
-            return View();
+            this.eventoService = _eventoService;
+            this.personaService = _personaService;
         }
 
-        // GET: EventosController1/Details/5
+        // GET: EventosController
+        public ActionResult Index()
+        {
+            var eventos = this.eventoService.GetAllEventosViewModel();
+
+            return View(eventos);
+        }
+
+        // GET: EventosController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: EventosController1/Create
+        // GET: EventosController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: EventosController1/Create
+        // GET: EventosController/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        // POST: EventosController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
         {
             try
             {
-                Persona personaAgasajada = new Persona();
-                personaAgasajada.Nombre = collection["Nombre"].ToString();  
-                personaAgasajada.Apellido = collection["Apellido"].ToString() ;
-                personaAgasajada.Direccion = collection["Direccion"].ToString();
-                personaAgasajada.Telefono = collection["Telefono"].ToString();
-                personaAgasajada.Email = collection["Email"].ToString();
-                personaAgasajada.Borrado = false;
 
-                int IdPersonaAgasajada = personaService.AgregarNuevaPersona(personaAgasajada);   
+                /*
+                 provincia
+                 localidad
+                 Codigopostal 
+                 Calle --> KM28 Segundo camino al fondo
+                -numero  -- 
+                 piso opcional 
+                 depto opcional 
+
+                 */
+
+
+                Persona personaAgasajada = new Persona();
+                personaAgasajada.Nombre = collection["Nombre"].ToString();
+                personaAgasajada.Apellido = collection["Apellido"].ToString();
+                personaAgasajada.Email = collection["Email"].ToString();
+                personaAgasajada.Telefono = collection["Telefono"].ToString();
+                personaAgasajada.Borrado = false;
+                personaAgasajada.Direccion = collection["Direccion"].ToString();
+
+                int IdPersonaAgasajada = personaService.AgregarNuevaPersona(personaAgasajada);
+
+
+
 
                 Eventos eventoNuevo = new Eventos();
                 eventoNuevo.IdPersonaAgasajada = IdPersonaAgasajada;
-                eventoNuevo.CantPersonas =int.Parse(collection["CantPersonas"].ToString());
-                eventoNuevo.Visible = true;
-                eventoNuevo.IdUsuario = 1;
-                eventoNuevo.FechaEvento = DateTime.Parse(collection["FechaEvento"].ToString()) ;
-                eventoNuevo.IdTipoDespedida = int.Parse(collection["IdTipoDespedida"].ToString());
-                eventoNuevo.NombreEvento = collection["NombreEvento"].ToString();
-                
 
-                this.eventosService.PostNuevoEvento(eventoNuevo);
+                eventoNuevo.CantidadPersonas = int.Parse(collection["CantidadPersonas"].ToString());
+                eventoNuevo.Visible = true;
+                eventoNuevo.IdUsuario = int.Parse(HttpContext.User.Claims.First(x => x.Type == "usuarioSolterout").Value); // HttpContext.User.Identity.Id;
+                eventoNuevo.FechaEvento = DateTime.Parse(collection["FechaEvento"].ToString());
+                eventoNuevo.IdTipoEvento = int.Parse(collection["IdTipoEvento"].ToString());
+                eventoNuevo.NombreEvento = collection["NombreEvento"].ToString();
+                eventoNuevo.IdEstadoEvento = 1; //Pendiente de Aprobacion
+                eventoNuevo.Borrado = 0;
+
+
+                this.eventoService.PostNuevoEvento(eventoNuevo);
+
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -70,13 +101,13 @@ namespace GestorEventos.WebAdmin.Controllers
             }
         }
 
-        // GET: EventosController1/Edit/5
+        // GET: EventosController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: EventosController1/Edit/5
+        // POST: EventosController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -91,13 +122,9 @@ namespace GestorEventos.WebAdmin.Controllers
             }
         }
 
-        // GET: EventosController1/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
-        // POST: EventosController1/Delete/5
+
+        // POST: EventosController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

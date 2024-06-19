@@ -24,7 +24,7 @@ namespace GestorEventos.Servicios.Servicios
         // constructor
         public PersonaService()
         {
-            _connectionString = "Server=localhost\\SQLEXPRESS;Database=master;Trusted_Connection=True;";
+            _connectionString = "Server=localhost\\SQLEXPRESS;Database=GestorEventos;Trusted_Connection=True;";
 
 
             /*PersonaDePrueba = new List<Persona>
@@ -41,7 +41,7 @@ namespace GestorEventos.Servicios.Servicios
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                List<Persona> personas = db.Query<Persona>("SELECT * FROM Personas WHERE Borrado = 0").ToList();// trae todos los registros que no fueron borrados
+                List<Persona> personas = db.Query<Persona>("SELECT * FROM Persona WHERE Borrado = 0").ToList();// trae todos los registros que no fueron borrados
 
                 return personas;
             }
@@ -54,7 +54,7 @@ namespace GestorEventos.Servicios.Servicios
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                Persona personas = db.Query<Persona>("SELECT * FROM Personas WHERE IdPersona=" + IdPersona.ToString()).FirstOrDefault();
+                Persona personas = db.Query<Persona>("SELECT * FROM Persona WHERE IdPersona=" + IdPersona.ToString()).FirstOrDefault();
                 return personas;
             }
 
@@ -74,7 +74,7 @@ namespace GestorEventos.Servicios.Servicios
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
 
-                string query = "INSERT INTO Personas (Nombre, Apellido, Direccion, Telefono, Email) VALUES (@Nombre, @Apellido, @Direccion, @Telefono, @Email )";
+                string query = "INSERT INTO Persona (Nombre, Apellido, Direccion, Telefono, Email) VALUES (@Nombre, @Apellido, @Direccion, @Telefono, @Email )";
                 db.Execute(query, persona);
                 return persona.IdPersona;
             }
@@ -84,7 +84,7 @@ namespace GestorEventos.Servicios.Servicios
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string query = "UPDATE Personas SET Nombre= @Nombre, Apellido= @Apellido, Direccion= @Direccion, Telefono= @Telefono, Email= @Email WHERE IdPersona = " + idPersona.ToString();
+                string query = "UPDATE Persona SET Nombre= @Nombre, Apellido= @Apellido, Direccion= @Direccion, Telefono= @Telefono, Email= @Email WHERE IdPersona = " + idPersona.ToString();
                 db.Execute(query, persona);
 
                 return true;
@@ -97,7 +97,7 @@ namespace GestorEventos.Servicios.Servicios
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string query = "UPDATE Personas SET Borrado = 1 WHERE IdPersona = " + idPersona.ToString();
+                string query = "UPDATE Persona SET Borrado = 1 WHERE IdPersona = " + idPersona.ToString();
                 db.Execute(query);
                 return true;
             }

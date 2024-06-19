@@ -1,4 +1,6 @@
-﻿using GestorEventos.Servicios.Entidades;
+﻿//CODIGO DEL PROFESOR
+
+using GestorEventos.Servicios.Entidades;
 using GestorEventos.Servicios.Servicios;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,71 +11,122 @@ namespace GestorEventos.Api.Controllers
     [ApiController]
     public class EventosController : ControllerBase
     {
-        private IEventosService eventosService;
 
-        // constructor
-        public EventosController(IEventosService _eventosService)
-        {
-            eventosService = _eventosService;
-        }
-
+        /// <summary>
+        /// Traerá todos los eventos
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult GetEventos()
         {
             EventosService eventosService = new EventosService();
 
-            return Ok(eventosService.GetAllEventos());
+            return Ok(eventosService.GetAllEventosViewModel());
         }
 
+        /// <summary>
+        /// Traerá solo un evento según el Id del Evento
+        /// </summary>
+        /// <param name="idEvento"> Id del Evento</param>
+        /// <returns></returns>
         [HttpGet("{idEvento:int}")]
-
-        public IActionResult GetEventoPorId(int idEvento)
+        public IActionResult GetEventosPorId(int idEvento)
         {
             EventosService eventosService = new EventosService();
+
             var evento = eventosService.GetEventoPorId(idEvento);
 
             if (evento == null)
-            {
                 return NotFound();
-            }
             else
-            {
                 return Ok(evento);
-            }
         }
 
-        [HttpPost("NuevoEvento")]
+        [HttpPost("Nuevo")]
         public IActionResult PostNuevoEvento([FromBody] Eventos evento)
         {
             EventosService eventoService = new EventosService();
-            bool resultado = eventoService.PostNuevoEvento(evento);
 
-            if(resultado) 
+
+
+            int resultado = eventoService.PostNuevoEvento(evento);
+
+            if (resultado > 0)
             {
+
                 return Ok();
-            }else
-            {
-                return NotFound();   
             }
-        }
-
-        [HttpPost("NuevoEventoCompleto")]
-        public IActionResult PostNuevoEventoModel([FromBody] EventoModel evento)
-        {
-            EventosService eventoService = new EventosService();
-
-            eventoService.PostNuevoEventoCompleto(evento);
-
-            return Ok();
+            else
+            {
+                return UnprocessableEntity();
+            }
 
 
         }
 
-        [HttpPut("Modificar/{idEvento:int}")]
+        /*
+
+		[HttpPost("NuevoEventoCompleto")]
+		public IActionResult PostNuevoEventoModel([FromBody] EventoModel evento)
+		{
+			EventoService eventoService = new EventoService();
+
+			eventoService.PostNuevoEventoCompleto(evento);
+
+			return Ok();
+
+
+
+			/*
+			 Evento --> 2 personas 
+					--> Lista de Servicios
+			 
+			 */
+
+
+        /*			bool resultado = eventoService.PostNuevoEvento(evento);
+
+                    if (resultado)
+                    {
+
+                        return Ok();
+                    }
+                    else
+                    {
+                        return UnprocessableEntity();
+                    }
+
+                }*/
+
+
+        [HttpPut("{idEvento:int}/Modificar")]
+
         public IActionResult PutNuevoEvento(int idEvento, [FromBody] Eventos evento)
         {
             EventosService eventoService = new EventosService();
             bool resultado = eventoService.PutNuevoEvento(idEvento, evento);
+
+            if (resultado)
+            {
+
+                return Ok();
+            }
+            else
+            {
+                return UnprocessableEntity(); //422 
+                                              //debio dar un InternalServer error (500) 
+
+            }
+
+        }
+
+
+        [HttpDelete("{idEvento:int}/Borrar")]
+        public IActionResult DeleteEvento(int idEvento)
+        {
+
+            EventosService eventoService = new EventosService();
+            bool resultado = eventoService.DeleteEvento(idEvento);
 
             if (resultado)
             {
@@ -85,23 +138,59 @@ namespace GestorEventos.Api.Controllers
             }
 
         }
-        [HttpDelete("{idEvento:int}/Borrar")]
-        public IActionResult DeleteEvento(int idEvento)
-        {
-            EventosService eventosService = new EventosService();
-            bool resultado = eventosService.DeleteEvento(idEvento);
-
-            if(resultado)
-            {
-                return Ok();
-            }
-            else
-            {
-                return UnprocessableEntity();// devuelve un 422
-            }
 
 
-        }
-       
+        /*
+		 * 
+		 * ,  delete – darse de baja)
+
+		 
+		 */
+
+
+        /*
+		 
+		 
+		 Primitivos 
+		 { 
+			int  = 1 
+			string  = "caracter"
+			char  = 'a'
+			decimal  = 1002.5
+			long = 498984984984984984984
+			bool = false / true 
+
+
+
+		 }
+		
+	     Clase { 
+			string descripcion 
+			int id 
+			
+		} 
+		Clase objeto = new Clase ()  <--- Molde para generar variables 
+			objeto.descripcion = "Hola";
+			objeto.id = 1; 
+
+
+
+		Listas ( IEnumerable ) 
+
+			Listas =  List<Clase> listaNueva = new List<Clase>();  
+			array o vectores = Clase[] arrayDeClases = []; 
+
+			IEnumerable
+			
+			pilas 
+			colas 
+			
+			
+
+		
+		 
+		 */
+
+
     }
 }
