@@ -27,13 +27,6 @@ namespace GestorEventos.Servicios.Servicios
             _connectionString = "Server=localhost\\SQLEXPRESS;Database=GestorEventos;Trusted_Connection=True;";
 
 
-            /*PersonaDePrueba = new List<Persona>
-            {
-                new Persona{IdPersona = 1, Nombre = "Joaquina", Apellido = "Aguilar", Direccion = "Chacabuco 1400", Email = "jota@gmail.com", Telefono = "11111"},
-                new Persona{IdPersona = 2, Nombre = "Franco", Apellido = "Schwab", Direccion = "Alemanes del Volga 2322", Email = "franco@gmail.com", Telefono = "222222" },
-                new Persona{IdPersona = 3, Nombre = "Sandra", Apellido = "Dos Santos", Direccion = "Fatima 1400", Email = "sandra@gmail.com", Telefono = "33333"}
-            };*/
-
         }
 
         // consulta sobre persona
@@ -58,27 +51,38 @@ namespace GestorEventos.Servicios.Servicios
                 return personas;
             }
 
-            /*try
-            {
-                Persona persona = PersonaDePrueba.Where(x => x.IdPersona == IdPersona).First();
-                return persona;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }*/
+            
         }
 
-        public int AgregarNuevaPersona(Persona persona)
+        /*public int AgregarNuevaPersona(Persona persona)
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
 
-                string query = "INSERT INTO Persona (Nombre, Apellido, Direccion, Telefono, Email, Borrado) VALUES (@Nombre, @Apellido, @Direccion, @Telefono, @Email, @Borrado )";
+                string query = "INSERT INTO Persona (Nombre, Apellido, Direccion, Telefono, Email, Borrado) VALUES (@Nombre, @Apellido, @Direccion, @Telefono, @Email, 0 )";
                 db.Execute(query, persona);
                 return persona.IdPersona;
             }
+        }*/
+        public int AgregarNuevaPersona(Persona persona)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                string query = @"
+            INSERT INTO Persona (Nombre, Apellido, Direccion, Telefono, Email, Borrado) 
+            VALUES (@Nombre, @Apellido, @Direccion, @Telefono, @Email, 0);
+            SELECT CAST(SCOPE_IDENTITY() as int)";
+
+                // Ejecutar la consulta y obtener el ID insertado
+                int idPersonaInsertada = db.QuerySingle<int>(query, persona);
+
+                // Asignar el ID generado a la persona y devolverlo
+                persona.IdPersona = idPersonaInsertada;
+
+                return persona.IdPersona;
+            }
         }
+
 
         public bool ModificarPersona(int idPersona, Persona persona)
         {

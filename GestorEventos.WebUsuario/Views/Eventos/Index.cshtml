@@ -5,14 +5,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Tus Despedidas</h1>
+<p>
+    <a asp-action="Create">Nuevo Evento</a>
+</p>
 
 <table class="table">
     <thead>
         <tr>
-            <th>
+            <!--<th>
                 @Html.DisplayNameFor(model => model.IdEvento)
-            </th>
+            </th>-->
             <th>
                 @Html.DisplayNameFor(model => model.NombreEvento)
             </th>
@@ -23,32 +26,32 @@
                 @Html.DisplayNameFor(model => model.CantidadPersonas)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdPersonaAgasajada)
+                @Html.DisplayNameFor(model => model.NombrePersonaAgasajada)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdTipoEvento)
+                @Html.DisplayNameFor(model => model.TipoEvento)
             </th>
-            <th>
+            <!--<th>
                 @Html.DisplayNameFor(model => model.Visible)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.IdUsuario)
-            </th>
+            </th>-->
             <th>
                 @Html.DisplayNameFor(model => model.EstadoEvento)
             </th>
-            <th>
+            <!--<th>
                 @Html.DisplayNameFor(model => model.Borrado)
-            </th>
+            </th>-->
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+            <!--<td>
                 @Html.DisplayFor(modelItem => item.IdEvento)
-            </td>
+            </td>-->
             <td>
                 @Html.DisplayFor(modelItem => item.NombreEvento)
             </td>
@@ -59,27 +62,27 @@
                 @Html.DisplayFor(modelItem => item.CantidadPersonas)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdPersonaAgasajada)
+                @Html.DisplayFor(modelItem => item.NombrePersonaAgasajada)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdTipoEvento)
+                @Html.DisplayFor(modelItem => item.TipoEvento)
             </td>
-            <td>
+            <!--<td>
                 @Html.DisplayFor(modelItem => item.Visible)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IdUsuario)
-            </td>
+            </td>-->
             <td>
                 @Html.DisplayFor(modelItem => item.EstadoEvento)
             </td>
-            <td>
+            <!--<td>
                 @Html.DisplayFor(modelItem => item.Borrado)
-            </td>
+            </td>-->
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                <!--@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |-->
+                @Html.ActionLink("Details", "Details", new { id=item.IdEvento }) 
+                <!--@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })-->
             </td>
         </tr>
 }

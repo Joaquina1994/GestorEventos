@@ -13,12 +13,12 @@ namespace GestorEventos.WebAdmin.Controllers
 
             // antes de pasar el modelo a la vista se asegura que no sea null
             ServiciosService serviciosService = new ServiciosService();
-            var model = serviciosService.GetServicios(); // Método para obtener todos los servicios
+            /*var model = serviciosService.GetServicios(); // Método para obtener todos los servicios
             if (model == null)
             {
                 model = new List<ServiciosVM>(); // Inicializa una lista vacía si el modelo es null
-            }
-            return View(model);
+            }*/
+            return View(serviciosService.GetServicios());
             /*ServiciosService serviciosService = new ServiciosService();
             serviciosService.GetServicios();
 
@@ -53,6 +53,7 @@ namespace GestorEventos.WebAdmin.Controllers
                 ServiciosVM servicios = new ServiciosVM();
                 servicios.Descripcion = collection["Descripcion"].ToString();
                 servicios.PrecioServicio = decimal.Parse(collection["PrecioServicio"]);
+               
 
                 serviciosService.AgregarServicio(servicios);
                 return RedirectToAction(nameof(Index));

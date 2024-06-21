@@ -11,12 +11,7 @@ namespace GestorEventos.Api.Servicios
         public TipoEventoService() {
 
             _connectionString = "Server=localhost\\SQLEXPRESS;Database=GestorEventos;Trusted_Connection=True;";
-            /*TiposDeEvento = new List<TipoEvento>
-            {
-                new TipoEvento{IdTipoEvento = 1, Descripcion = "Despedida de solteros"},
-                new TipoEvento{IdTipoEvento = 2, Descripcion = "Despedida de solteras"}
-
-            };*/
+         
         }
 
         public  IEnumerable<TipoEvento> GetTipoEventos()

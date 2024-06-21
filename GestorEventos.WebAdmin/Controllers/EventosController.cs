@@ -5,6 +5,7 @@ using GestorEventos.Servicios.Servicios;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives;
 
 namespace GestorEventos.WebUsuario.Controllers
 {
@@ -12,11 +13,13 @@ namespace GestorEventos.WebUsuario.Controllers
     {
         private IEventosService eventoService;
         private IPersonaService personaService;
-
+        
         public EventosController(IEventosService _eventoService, IPersonaService _personaService)
         {
             this.eventoService = _eventoService;
             this.personaService = _personaService;
+           
+
         }
 
         // GET: EventosController
@@ -30,6 +33,9 @@ namespace GestorEventos.WebUsuario.Controllers
         // GET: EventosController/Details/5
         public ActionResult Details(int id)
         {
+
+
+
             return View();
         }
 
@@ -53,18 +59,6 @@ namespace GestorEventos.WebUsuario.Controllers
             try
             {
 
-                /*
-                 provincia
-                 localidad
-                 Codigopostal 
-                 Calle --> KM28 Segundo camino al fondo
-                -numero  -- 
-                 piso opcional 
-                 depto opcional 
-
-                 */
-
-
                 Persona personaAgasajada = new Persona();
                 personaAgasajada.Nombre = collection["Nombre"].ToString();
                 personaAgasajada.Apellido = collection["Apellido"].ToString();
@@ -75,21 +69,17 @@ namespace GestorEventos.WebUsuario.Controllers
 
                 int IdPersonaAgasajada = personaService.AgregarNuevaPersona(personaAgasajada);
 
-
-
-
                 Eventos eventoNuevo = new Eventos();
                 eventoNuevo.IdPersonaAgasajada = IdPersonaAgasajada;
 
                 eventoNuevo.CantidadPersonas = int.Parse(collection["CantidadPersonas"].ToString());
                 eventoNuevo.Visible = true;
-                eventoNuevo.IdUsuario = 1;//int.Parse(HttpContext.User.Claims.First(x => x.Type == "usuarioSolterout").Value); // HttpContext.User.Identity.Id;
+                eventoNuevo.IdUsuario = int.Parse(HttpContext.User.Claims.First(x => x.Type == "usuarioSolterout").Value); // HttpContext.User.Identity.Id;
                 eventoNuevo.FechaEvento = DateTime.Parse(collection["FechaEvento"].ToString());
                 eventoNuevo.IdTipoEvento = int.Parse(collection["IdTipoEvento"].ToString());
                 eventoNuevo.NombreEvento = collection["NombreEvento"].ToString();
                 eventoNuevo.IdEstadoEvento = 1; //Pendiente de Aprobacion
-                eventoNuevo.Borrado = 0;
-
+                eventoNuevo.Borrado = false;
 
                 this.eventoService.PostNuevoEvento(eventoNuevo);
 
@@ -99,6 +89,7 @@ namespace GestorEventos.WebUsuario.Controllers
             {
                 return View();
             }
+            return View(collection);
         }
 
         // GET: EventosController/Edit/5
@@ -138,5 +129,80 @@ namespace GestorEventos.WebUsuario.Controllers
                 return View();
             }
         }
+
+        [HttpPost("AprobarEvento")]
+        public IActionResult AprobarEvento(int idEvento, IFormCollection collection)
+        {
+            // Intentar obtener el valor asociado con la clave "idEvento"
+            if (collection.TryGetValue("idEvento", out var idEventoValues))
+            {
+                // Verificar que no esté vacío
+                if (!StringValues.IsNullOrEmpty(idEventoValues) && idEventoValues.Count > 0)
+                {
+                    try
+                    {
+                        // Realizar la operación si existe al menos un elemento
+                        int idEventoParsed = int.Parse(idEventoValues[0]);
+                        this.eventoService.CambiarEstadoEvento(idEventoParsed, 2);
+                    }
+                    catch (FormatException ex)
+                    {
+                        // Manejar el caso cuando el valor no se puede convertir a int
+                        return BadRequest("El valor 'idEvento' no es un número válido.");
+                    }
+                }
+                else
+                {
+                    // Manejar el caso cuando la colección está vacía
+                    return BadRequest("La colección 'idEvento' está vacía.");
+                }
+            }
+            else
+            {
+                // Manejar el caso cuando la clave no existe
+                return BadRequest("La clave 'idEvento' no existe en la colección.");
+            }
+
+            // Continuar con el resto de tu código
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost("RechazarEvento")]
+        public IActionResult RechazarEvento(int idEvento, IFormCollection collection)
+        {
+            // Intentar obtener el valor asociado con la clave "idEvento"
+            if (collection.TryGetValue("idEvento", out var idEventoValues))
+            {
+                // Verificar que no esté vacío
+                if (!StringValues.IsNullOrEmpty(idEventoValues) && idEventoValues.Count > 0)
+                {
+                    try
+                    {
+                        // Realizar la operación si existe al menos un elemento
+                        int idEventoParsed = int.Parse(idEventoValues[0]);
+                        this.eventoService.CambiarEstadoEvento(idEventoParsed, 3);
+                    }
+                    catch (FormatException ex)
+                    {
+                        // Manejar el caso cuando el valor no se puede convertir a int
+                        return BadRequest("El valor 'idEvento' no es un número válido.");
+                    }
+                }
+                else
+                {
+                    // Manejar el caso cuando la colección está vacía
+                    return BadRequest("La colección 'idEvento' está vacía.");
+                }
+            }
+            else
+            {
+                // Manejar el caso cuando la clave no existe
+                return BadRequest("La clave 'idEvento' no existe en la colección.");
+            }
+
+            // Continuar con el resto de tu código
+            return RedirectToAction("Index");
+        }
+
     }
 }

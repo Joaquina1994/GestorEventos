@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GestorEventos.WebAdmin")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9fc7acfd605b02aecf5926bf11db1b01632a1ac9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+77b3d63931d34b370c74ed1dd1ce48f6dcce2715")]
 [assembly: System.Reflection.AssemblyProductAttribute("GestorEventos.WebAdmin")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GestorEventos.WebAdmin")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

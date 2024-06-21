@@ -13,10 +13,9 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <h3>Ingresa los datos de tu Evento:</h3>
-            
+            <h2>Crear nuevo Evento - Ingrese su información</h2>
             <div class="form-group">
-                
+
                 <input asp-for="IdEvento" class="form-control" type="hidden" value="0" />
                 <span asp-validation-for="IdEvento" class="text-danger"></span>
             </div>
@@ -26,9 +25,13 @@
                 <span asp-validation-for="NombreEvento" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FechaEvento" class="control-label"></label>
+                <!--<label asp-for="FechaEvento" class="control-label"></label>
                 <input asp-for="FechaEvento" class="form-control" />
-                <span asp-validation-for="FechaEvento" class="text-danger"></span>
+                <span asp-validation-for="FechaEvento" class="text-danger"></span>-->
+                <label for="FechaEvento">Fecha del Evento:</label>
+                <input type="date" id="FechaEvento" name="FechaEvento" required><br>
+                
+
             </div>
             <div class="form-group">
                 <label asp-for="CantidadPersonas" class="control-label"></label>
@@ -40,65 +43,96 @@
                 <select asp-for="IdTipoEvento">
                     <option value="1">Despedida de Solteros</option>
                     <option value="2">Despedida de Solteras</option>
+
                 </select>
-                
                 <span asp-validation-for="IdTipoEvento" class="text-danger"></span>
             </div>
             <div class="form-group">
-                
+
                 <input asp-for="IdPersonaAgasajada" class="form-control" type="hidden" value="0" />
                 <span asp-validation-for="IdPersonaAgasajada" class="text-danger"></span>
             </div>
             <div class="form-group">
-                
+
                 <input asp-for="IdUsuario" class="form-control" type="hidden" value="0" />
                 <span asp-validation-for="IdUsuario" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Visible" value="0" type="hidden"/> 
-                    <input class="form-check-input" asp-for="Borrado" value="0" type="hidden" />
+                    <input class="form-check-input" asp-for="Visible" value="true" type="hidden" />
+                    <input class="form-check-input" asp-for="Borrado" value="true" type="hidden" />
                     <input asp-for="IdEstadoEvento" class="form-control" type="hidden" value="2" />
+
                 </label>
             </div>
+            <h3>Datos del Agasajado</h3>
             <div class="form-group">
 
-                <h3>Ingresa los datos de la persona agasajada:</h3>
-                <div class="form-group">
+                <input asp-for="IdPersona" class="form-control" type="hidden" value="0" />
+                <span asp-validation-for="IdPersona" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Apellido" class="control-label"></label>
+                <input asp-for="Apellido" class="form-control" />
+                <span asp-validation-for="Apellido" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Direccion" class="control-label"></label>
+                <input asp-for="Direccion" class="form-control" />
+                <span asp-validation-for="Direccion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefono" class="control-label"></label>
+                <input asp-for="Telefono" class="form-control" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="hidden" asp-for="Borrado" value="false" />
+                </label>
+            </div>
 
-                    <input asp-for="IdPersona" class="form-control" type="hidden" value="0" />
-                    <span asp-validation-for="IdPersona" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Nombre" class="control-label"></label>
-                    <input asp-for="Nombre" class="form-control" />
-                    <span asp-validation-for="Nombre" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Apellido" class="control-label"></label>
-                    <input asp-for="Apellido" class="form-control" />
-                    <span asp-validation-for="Apellido" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Direccion" class="control-label"></label>
-                    <input asp-for="Direccion" class="form-control" />
-                    <span asp-validation-for="Direccion" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Telefono" class="control-label"></label>
-                    <input asp-for="Telefono" class="form-control" />
-                    <span asp-validation-for="Telefono" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Email" class="control-label"></label>
-                    <input asp-for="Email" class="form-control" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-                <div class="form-group form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="hidden" asp-for="Borrado" value="false"/> 
-                    </label>
-                </div>
+
+            <table>
+
+                <thead>
+                <th></th>
+                <th>Servicio</th>
+                <th>Precio</th>
+                </thead>
+                <tbody>
+
+                    @foreach (var servicios in Model.ListaDeServiciosDisponibles)
+                    {
+
+                        <tr>
+                            <td>
+
+                                <input type="checkbox" name="ServiciosVM" value="@servicios.IdServicio" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => servicios.Descripcion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => servicios.PrecioServicio)
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
@@ -110,5 +144,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

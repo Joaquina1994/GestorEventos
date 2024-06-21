@@ -20,8 +20,10 @@ namespace GestorEventos.Servicios.Servicios
         IEnumerable<EventoViewModel> GetMisEventos(int IdUsuario);
         Eventos GetEventoPorId(int IdEvento);
         int PostNuevoEvento(Eventos eventos);
-        //void PostNuevoEventoCompleto(EventoModel eventoModel);
+       
         bool PutNuevoEvento(int idEvento, Eventos eventos);
+        bool CambiarEstadoEvento(int IdEvento, int IdEstado);
+        //Task<bool> CambiarEstadoEventoAsync(int IdEvento, int IdEstado);
     }
 
     public class EventosService : IEventosService
@@ -55,7 +57,17 @@ namespace GestorEventos.Servicios.Servicios
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                List<EventoViewModel> eventos = db.Query<EventoViewModel>("SELECT Eventos.*, EstadoEventos.Descripcion EstadoEvento FROM Eventos LEFT JOIN EstadoEventos on EstadoEventos.IdEstadoEvento = Eventos.idEstadoEvento").ToList();
+                List<EventoViewModel> eventos = db.Query<EventoViewModel>("SELECT Eventos.*," +
+                    "EstadoEventos.Descripcion AS EstadoEvento," +
+                    "Persona.Nombre AS NombrePersonaAgasajada, TipoEvento.Descripcion AS TipoEvento " + // Espacio añadido aquí
+                    "FROM Eventos " + // Espacio añadido aquí
+                    "LEFT JOIN EstadoEventos ON EstadoEventos.IdEstadoEvento = Eventos.IdEstadoEvento " + // Espacio añadido aquí
+                    "LEFT JOIN Persona ON Persona.IdPersona = Eventos.IdPersonaAgasajada " + // Espacio añadido aquí
+                    "LEFT JOIN TipoEvento ON TipoEvento.IdTipoEvento = Eventos.IdTipoEvento").ToList(); // Espacio añadido aquí
+                ;
+
+
+                //List<EventoViewModel> eventos = db.Query<EventoViewModel>("SELECT Eventos.*, EstadoEventos.Descripcion EstadoEvento FROM Eventos LEFT JOIN EstadoEventos on EstadoEventos.IdEstadoEvento = Eventos.idEstadoEvento").ToList();
 
                 return eventos;
 
@@ -66,7 +78,22 @@ namespace GestorEventos.Servicios.Servicios
 
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                List<EventoViewModel> eventos = db.Query<EventoViewModel>("SELECT Eventos.*, EstadoEventos.Descripcion EstadoEvento FROM Eventos LEFT JOIN EstadoEventos ON EstadoEventos.IdEstadoEvento = Eventos.idEstadoEvento WHERE Eventos.IdUsuario =" + idUsuario.ToString()).ToList();
+                List<EventoViewModel> eventos = db.Query<EventoViewModel>(@"
+                    SELECT Eventos.*, 
+                    EstadoEventos.Descripcion AS EstadoEvento,
+                    Persona.Nombre AS NombrePersonaAgasajada,
+                    TipoEvento.Descripcion AS TipoEvento
+                    FROM Eventos
+                    LEFT JOIN EstadoEventos ON EstadoEventos.IdEstadoEvento = Eventos.IdEstadoEvento
+                    LEFT JOIN Persona ON Persona.IdPersona = Eventos.IdPersonaAgasajada
+                    LEFT JOIN TipoEvento ON TipoEvento.IdTipoEvento = Eventos.IdTipoEvento
+                    WHERE Eventos.IdUsuario = @IdUsuario",
+                    new { IdUsuario = idUsuario })
+                    .ToList();
+
+
+
+                //List<EventoViewModel> eventos = db.Query<EventoViewModel>("SELECT Eventos.*, EstadoEventos.Descripcion EstadoEvento FROM Eventos LEFT JOIN EstadoEventos ON EstadoEventos.IdEstadoEvento = Eventos.idEstadoEvento WHERE Eventos.IdUsuario =" + idUsuario.ToString()).ToList();
 
                 return eventos;
 
@@ -90,38 +117,62 @@ namespace GestorEventos.Servicios.Servicios
                 return null;
             }
         }
-
-        /*public int PostNuevoEvento(Eventos eventos)
+        public bool CambiarEstadoEvento(int IdEvento, int IdEstadoEvento)
         {
             try
             {
                 using (IDbConnection db = new SqlConnection(_connectionString))
                 {
-                    string query = "INSERT INTO Eventos (NombreEvento, FechaEvento, CantidadPersonas, IdPersonaAgasajada, IdTipoEvento, Visible, IdUsuario, IdEstadoEvento, Borrado) VALUES ( @NombreEvento, @FechaEvento, @CantidadPersonas, @IdPersonaAgasajada, @IdTipoEvento, @Visible, @IdUsuario, @IdEstadoEvento, @Borrado);" +
-                    "SELECT  CAST(SCOPE_IDENTITY() AS INT) ";
-                    eventos.IdEvento = db.QuerySingle<int>(query, eventos);
-                    //db.QuerySingle(query, evento);
+                    string query = "UPDATE Eventos SET IdEstadoEvento = " + IdEstadoEvento.ToString() + " WHERE IdEvento = " + IdEvento.ToString();
+                    
 
+                    db.Execute(query);
 
-                    return eventos.IdEvento;
+                    return true;
                 }
-
             }
-            
             catch (Exception ex)
             {
-                return 0;
-            }
+                // Loguear el error
+                // Console.WriteLine(ex.Message);
 
+                return false;
+            }
+        }
+
+        /*public async Task<bool> CambiarEstadoEventoAsync(int IdEvento, int IdEstado)
+        {
+            try
+            {
+                using (IDbConnection db = new SqlConnection(_connectionString))
+                {
+                    string query = "UPDATE Eventos SET IdEstadoEvento = @IdEstado WHERE IdEvento = @IdEvento";
+                    var parameters = new { IdEstado = IdEstado, IdEvento = IdEvento };
+
+                    await db.ExecuteAsync(query, parameters);
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Loguear el error
+                // Console.WriteLine(ex.Message);
+
+                return false;
+            }
         }*/
-        public int PostNuevoEvento(Eventos eventos)
+
+
+    
+    public int PostNuevoEvento(Eventos eventos)
         {
             try
             {
                 using (IDbConnection db = new SqlConnection(_connectionString))
                 {
                     string query = @"INSERT INTO Eventos (NombreEvento, FechaEvento, CantidadPersonas, IdPersonaAgasajada, IdTipoEvento, Visible, IdUsuario, IdEstadoEvento, Borrado)
-                             VALUES (@NombreEvento, @FechaEvento, @CantidadPersonas, @IdPersonaAgasajada, @IdTipoEvento, @Visible, @IdUsuario, @IdEstadoEvento, @Borrado);
+                             VALUES (@NombreEvento, @FechaEvento, @CantidadPersonas, @IdPersonaAgasajada, @IdTipoEvento, @Visible, @IdUsuario, @IdEstadoEvento, 0);
                              SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
                     eventos.IdEvento = db.QuerySingle<int>(query, eventos);
@@ -136,28 +187,7 @@ namespace GestorEventos.Servicios.Servicios
         }
 
 
-        /*public int PostNuevoEvento(Eventos eventos)
-        {
-            try
-            {
-                using (IDbConnection db = new SqlConnection(_connectionString))
-                {
-                    string query = @"INSERT INTO Eventos (NombreEvento, FechaEvento, CantidadPersonas, IdPersonaAgasajada, IdTipoEvento, Visible, IdUsuario, IdEstadoEvento, Borrado) 
-                             VALUES (@NombreEvento, @FechaEvento, @CantidadPersonas, @IdPersonaAgasajada, @IdTipoEvento, @Visible, @IdUsuario, @IdEstadoEvento, @Borrado);
-                             SELECT CAST(SCOPE_IDENTITY() AS INT);";
-
-                    eventos.IdEvento = db.QuerySingle<int>(query, eventos);
-
-                    return eventos.IdEvento;
-                }
-            }
-            catch (Exception ex)
-            {
-                // Aquí podrías registrar el error para depuración
-                Console.WriteLine(ex.Message);
-                return 0;
-            }
-        }*/
+        
 
 
         public bool PutNuevoEvento(int idEvento, Eventos eventos)
@@ -170,23 +200,7 @@ namespace GestorEventos.Servicios.Servicios
             {
                 return false;
             }
-            /*try
-            {
-                var eventoDeLista = this.Eventos.Where(x => x.IdEvento == idEvento).First();
-
-                eventoDeLista.FechaEvento = eventoDeLista.FechaEvento;
-                eventoDeLista.NombreEvento = eventoDeLista.NombreEvento;
-                eventoDeLista.CantPersonas = eventoDeLista.CantPersonas;
-                eventoDeLista.IdUsuario = eventoDeLista.IdUsuario;
-                eventoDeLista.IdPersonaAgasajada = eventoDeLista.IdPersonaAgasajada;
-
-                return true;
-
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }*/
+            
 
         }
 

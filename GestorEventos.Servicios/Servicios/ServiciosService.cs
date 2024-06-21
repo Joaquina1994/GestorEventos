@@ -8,7 +8,7 @@ namespace GestorEventos.Servicios.Servicios
 {
     public interface IServiciosService
     {
-        IEnumerable<ServiciosVM> Servicios { get; set; }
+       
 
         bool AgregarServicio(ServiciosVM servicios);
         bool BorradoLogicoServicio(int IdServicio);
@@ -19,18 +19,12 @@ namespace GestorEventos.Servicios.Servicios
 
     public class ServiciosService : IServiciosService
     {
-        public IEnumerable<ServiciosVM> Servicios { get; set; }
-
+       
         private string _connectionString;
 
         public ServiciosService()
         {
             _connectionString = "Server=localhost\\SQLEXPRESS;Database=GestorEventos;Trusted_Connection=True;";
-
-
-            /*new ServiciosVM { IdServicio = 1, Descripcion = "Bar Hopping", PrecioUnitario = 10000 };
-            new ServiciosVM { IdServicio = 2, Descripcion = "Traslado", PrecioUnitario = 20000 };
-            new ServiciosVM { IdServicio = 3, Descripcion = "Entradas", PrecioUnitario = 5000 };*/
 
         }
 
@@ -44,25 +38,37 @@ namespace GestorEventos.Servicios.Servicios
 
 
         }
+        /*public IEnumerable<ServiciosVM> GetServicios()
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                try
+                {
+                    var servicios = db.Query<ServiciosVM>("SELECT * FROM Servicios WHERE Borrado = 0").ToList();
+                    if (servicios == null || !servicios.Any())
+                    {
+                        Console.WriteLine("No services found.");
+                    }
+                    return servicios ?? new List<ServiciosVM>();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Exception in GetServicios: {ex.Message}");
+                    // Log la excepción
+                    return new List<ServiciosVM>(); // Siempre devolver una lista no nula
+                }
+            }
+        }*/
+
 
         public ServiciosVM GetServiciosPorId(int IdServicio)
         {
-
-
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                ServiciosVM servicios = db.Query<ServiciosVM>("SELECT * FROM servicios WHERE IdServicio = " + IdServicio.ToString()).First();
+                ServiciosVM servicios = db.Query<ServiciosVM>("SELECT * FROM Servicios WHERE IdServicio = " + IdServicio.ToString()).First();
                 return servicios;
             }
-            /*try
-            {
-                ServiciosVM servicios = Servicios.Where(x => x.IdServicio == IdServicio).First();
-                return servicios;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }*/
+            
         }
 
         public bool AgregarServicio(ServiciosVM servicios)
@@ -70,36 +76,11 @@ namespace GestorEventos.Servicios.Servicios
             using (IDbConnection db = new SqlConnection(_connectionString))
 
             {
-                string query = "INSERT INTO Servicios(Descripcion, PrecioServicio, Borrado) VALUES(@Descripcion, @PrecioServicio, @Borrado)";
+                string query = "INSERT INTO Servicios(Descripcion, PrecioServicio, Borrado) VALUES(@Descripcion, @PrecioServicio, 0)";
                 db.Execute(query, servicios);
                 return true;
             }
         }
-
-
-
-        /*public int AgregarServicio(ServiciosVM servicios)
-        {
-
-            using (IDbConnection db = new SqlConnection(_connectionString))
-            {
-
-                string query = "INSERT INTO Servicios (IdServicio, Descripcion, PrecioUnitario, Borrado) VALUES (@IdServicio, @Descripcion, @PrecioUnitario, @Borrado)";
-                db.Execute(query, servicios);
-                return servicios.IdServicio;
-            }
-
-            try
-            {
-                List<ServiciosVM> lista = this.Servicios.ToList();
-                lista.Add(servicios);
-
-                return true;
-            }catch (Exception ex)
-            { 
-                return false;   
-            }
-    }*/
 
         public bool ModificarServicio(int IdServicio, ServiciosVM servicios)
         {

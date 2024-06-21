@@ -1,7 +1,9 @@
 using GestorEventos.WebUsuario.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Net.Http.Headers;
 
 namespace GestorEventos.WebUsuario.Controllers
 {
@@ -15,8 +17,9 @@ namespace GestorEventos.WebUsuario.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+
             return View();
         }
 
@@ -30,5 +33,6 @@ namespace GestorEventos.WebUsuario.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }

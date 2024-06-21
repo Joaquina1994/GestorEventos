@@ -234,3 +234,6 @@ C:\Users\jota_\source\repos\GestorEventos\GestorEventos.WebUsuario\bin\Debug\net
 C:\Users\jota_\source\repos\GestorEventos\GestorEventos.WebUsuario\bin\Debug\net8.0\GestorEventos.Servicios.dll
 C:\Users\jota_\source\repos\GestorEventos\GestorEventos.WebUsuario\bin\Debug\net8.0\GestorEventos.Servicios.pdb
 C:\Users\jota_\source\repos\GestorEventos\GestorEventos.WebUsuario\obj\Debug\net8.0\GestorEv.39FF6EE1.Up2Date
+C:\Users\jota_\source\repos\GestorEventos\GestorEventos.WebUsuario\bin\Debug\net8.0\NLog.dll
+C:\Users\jota_\source\repos\GestorEventos\GestorEventos.WebUsuario\bin\Debug\net8.0\NLog.Extensions.Logging.dll
+C:\Users\jota_\source\repos\GestorEventos\GestorEventos.WebUsuario\bin\Debug\net8.0\NLog.Web.AspNetCore.dll
