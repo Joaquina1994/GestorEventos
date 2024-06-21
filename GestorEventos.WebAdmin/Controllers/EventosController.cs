@@ -13,13 +13,13 @@ namespace GestorEventos.WebUsuario.Controllers
     {
         private IEventosService eventoService;
         private IPersonaService personaService;
-        private IUsuarioService usuarioService;
         
-        public EventosController(IEventosService _eventoService, IPersonaService _personaService, IUsuarioService _usuarioService)
+        
+        public EventosController(IEventosService _eventoService, IPersonaService _personaService)
         {
             this.eventoService = _eventoService;
             this.personaService = _personaService;
-            this.usuarioService = _usuarioService;
+            
            
 
         }
