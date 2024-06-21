@@ -58,13 +58,16 @@ namespace GestorEventos.Servicios.Servicios
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 List<EventoViewModel> eventos = db.Query<EventoViewModel>("SELECT Eventos.*," +
-                    "EstadoEventos.Descripcion AS EstadoEvento," +
-                    "Persona.Nombre AS NombrePersonaAgasajada, TipoEvento.Descripcion AS TipoEvento " + // Espacio añadido aquí
-                    "FROM Eventos " + // Espacio añadido aquí
-                    "LEFT JOIN EstadoEventos ON EstadoEventos.IdEstadoEvento = Eventos.IdEstadoEvento " + // Espacio añadido aquí
-                    "LEFT JOIN Persona ON Persona.IdPersona = Eventos.IdPersonaAgasajada " + // Espacio añadido aquí
-                    "LEFT JOIN TipoEvento ON TipoEvento.IdTipoEvento = Eventos.IdTipoEvento").ToList(); // Espacio añadido aquí
-                ;
+                        "EstadoEventos.Descripcion AS EstadoEvento," +
+                        "Persona.Nombre AS NombrePersonaAgasajada," +
+                        "TipoEvento.Descripcion AS TipoEvento," +
+                        "Usuario.NombreCompleto AS NombreUsuario " + // Nuevo campo a seleccionar
+                        "FROM Eventos " + // Asegúrate de tener espacios después de cada tabla
+                        "LEFT JOIN EstadoEventos ON EstadoEventos.IdEstadoEvento = Eventos.IdEstadoEvento " +
+                        "LEFT JOIN Persona ON Persona.IdPersona = Eventos.IdPersonaAgasajada " +
+                        "LEFT JOIN TipoEvento ON TipoEvento.IdTipoEvento = Eventos.IdTipoEvento " +
+                        "LEFT JOIN Usuario ON Usuario.IdUsuario = Eventos.IdUsuario").ToList();
+
 
 
                 //List<EventoViewModel> eventos = db.Query<EventoViewModel>("SELECT Eventos.*, EstadoEventos.Descripcion EstadoEvento FROM Eventos LEFT JOIN EstadoEventos on EstadoEventos.IdEstadoEvento = Eventos.idEstadoEvento").ToList();
@@ -79,17 +82,20 @@ namespace GestorEventos.Servicios.Servicios
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 List<EventoViewModel> eventos = db.Query<EventoViewModel>(@"
-                    SELECT Eventos.*, 
-                    EstadoEventos.Descripcion AS EstadoEvento,
-                    Persona.Nombre AS NombrePersonaAgasajada,
-                    TipoEvento.Descripcion AS TipoEvento
-                    FROM Eventos
-                    LEFT JOIN EstadoEventos ON EstadoEventos.IdEstadoEvento = Eventos.IdEstadoEvento
-                    LEFT JOIN Persona ON Persona.IdPersona = Eventos.IdPersonaAgasajada
-                    LEFT JOIN TipoEvento ON TipoEvento.IdTipoEvento = Eventos.IdTipoEvento
-                    WHERE Eventos.IdUsuario = @IdUsuario",
-                    new { IdUsuario = idUsuario })
-                    .ToList();
+                            SELECT Eventos.*, 
+                            EstadoEventos.Descripcion AS EstadoEvento,
+                            Persona.Nombre AS NombrePersonaAgasajada,
+                            TipoEvento.Descripcion AS TipoEvento,
+                            Usuario.NombreCompleto AS NombreUsuario
+                            FROM Eventos
+                            LEFT JOIN EstadoEventos ON EstadoEventos.IdEstadoEvento = Eventos.IdEstadoEvento
+                            LEFT JOIN Persona ON Persona.IdPersona = Eventos.IdPersonaAgasajada
+                            LEFT JOIN TipoEvento ON TipoEvento.IdTipoEvento = Eventos.IdTipoEvento
+                            LEFT JOIN Usuario ON Usuario.IdUsuario = Eventos.IdUsuario
+                            WHERE Eventos.IdUsuario = @IdUsuario",
+                            new { IdUsuario = idUsuario })
+                            .ToList();
+
 
 
 

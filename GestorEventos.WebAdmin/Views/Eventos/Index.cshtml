@@ -5,14 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Lista de Eventos Contratados</h1>
 
 <table class="table">
     <thead>
         <tr>
-            <th>
+            <!--<th>
                 @Html.DisplayNameFor(model => model.IdEvento)
-            </th>
+            </th>-->
             <th>
                 @Html.DisplayNameFor(model => model.NombreEvento)
             </th>
@@ -28,27 +28,27 @@
             <th>
                 @Html.DisplayNameFor(model => model.TipoEvento)
             </th>
-            <th>
+            <!--<th>
                 @Html.DisplayNameFor(model => model.Visible)
-            </th>
+            </th>-->
             <th>
-                @Html.DisplayNameFor(model => model.IdUsuario)
+                @Html.DisplayNameFor(model => model.NombreUsuario)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.EstadoEvento)
             </th>
-            <th>
+            <!--<th>
                 @Html.DisplayNameFor(model => model.Borrado)
-            </th>
+            </th>-->
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+            <!--<td>
                 @Html.DisplayFor(modelItem => item.IdEvento)
-            </td>
+            </td>-->
             <td>
                 @Html.DisplayFor(modelItem => item.NombreEvento)
             </td>
@@ -64,18 +64,18 @@
             <td>
                 @Html.DisplayFor(modelItem => item.TipoEvento)
             </td>
-            <td>
+            <!--<td>
                 @Html.DisplayFor(modelItem => item.Visible)
-            </td>
+            </td>-->
             <td>
-                @Html.DisplayFor(modelItem => item.IdUsuario)
+                @Html.DisplayFor(modelItem => item.NombreUsuario)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.EstadoEvento)
             </td>
-            <td>
+            <!--<td>
                 @Html.DisplayFor(modelItem => item.Borrado)
-            </td>
+            </td>-->
             <td>
                 @Html.ActionLink("Details", "Details", new {  id=item.IdEvento }) |
                     <form asp-action="AprobarEvento">

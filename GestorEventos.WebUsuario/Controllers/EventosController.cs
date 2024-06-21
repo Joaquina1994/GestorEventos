@@ -37,29 +37,46 @@ namespace GestorEventos.WebUsuario.Controllers
         // GET: EventosController/Details/5
         public ActionResult Details(int id)
         {
+            int idUsuario;
+            try
+            {
+                idUsuario = int.Parse(HttpContext.User.Claims.First(x => x.Type == "usuarioSolterout").Value);
+            }
+            catch (Exception ex)
+            {
+                // Manejar el error adecuadamente
+                return BadRequest("Usuario no válido.");
+            }
 
-            int idUsuario = int.Parse(
-                    HttpContext.User.Claims.First(x => x.Type == "usuarioSolterout").Value);
-
-            var evento = this.eventoService.GetMisEventos(idUsuario).First(x => x.IdEvento == id);
+            var evento = this.eventoService.GetMisEventos(idUsuario).FirstOrDefault(x => x.IdEvento == id);
+            if (evento == null)
+            {
+                // Manejar el caso donde el evento no se encuentra
+                return NotFound("Evento no encontrado.");
+            }
 
             var listaServiciosDisponibles = this.servicioService.GetServicios();
             var listaIdServiciosContratados = this.eventosServiciosService.GetServiciosPorEvento(evento.IdEvento);
             List<ServiciosVM> listaServicios = new List<ServiciosVM>();
+
             foreach (var servicio in listaIdServiciosContratados)
             {
-                var servicioContratado = listaServiciosDisponibles.First(x => x.IdServicio == servicio.IdServicio);
+                var servicioContratado = listaServiciosDisponibles.FirstOrDefault(x => x.IdServicio == servicio.IdServicio);
                 if (servicioContratado != null)
                 {
                     listaServicios.Add(servicioContratado);
                 }
+                else
+                {
+                    // Manejar el caso donde el servicio contratado no se encuentra en la lista de servicios disponibles
+                    // Podrías registrar un mensaje de error o manejarlo según sea necesario
+                }
             }
 
             ViewData["ListaServicios"] = listaServicios;
-
-
             return View(evento);
         }
+
 
         // GET: EventosController/Create
         public ActionResult Create()

@@ -22,6 +22,7 @@ namespace GestorEventos.Servicios.Entidades
         public string NombrePersonaAgasajada { get; set; }
 
         public string TipoEvento { get; set; }
+        public string NombreUsuario {  get; set; }
     }
 
     public class EventoModel : Eventos // herencia simple, hereda de Eventos
