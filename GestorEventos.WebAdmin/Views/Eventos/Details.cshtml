@@ -1,89 +1,101 @@
 ﻿@using GestorEventos.Servicios.Entidades
 @model GestorEventos.Servicios.Entidades.EventoViewModel
 
+
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Detalles de tu Evento</h1>
+<h1>Detalles</h1>
 
 <div>
-    <h4>Tu Despedida:</h4>
+    <h4>Información de tu Despedida</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.EstadoEvento)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.EstadoEvento)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdEvento)
+        <!--<dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.IdEvento)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdEvento)
-        </dd>
-        <dt class = "col-sm-2">
+        <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.IdEvento)
+        </dd>-->
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.NombreEvento)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.NombreEvento)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.FechaEvento)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.FechaEvento)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CantidadPersonas)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CantidadPersonas)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdPersonaAgasajada)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TipoEvento)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdPersonaAgasajada)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TipoEvento)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdTipoEvento)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NombrePersonaAgasajada)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdTipoEvento)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NombrePersonaAgasajada)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Visible)
+        <!--<dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.IdUsuario)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Visible)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdUsuario)
+        <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.IdUsuario)
+        </dd>-->
+        <!--<dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Visible)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdUsuario)
+        <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Visible)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdEstadoEvento)
+        <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Borrado)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdEstadoEvento)
+        <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Borrado)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Borrado)
+        <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.IdEstadoEvento)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Borrado)
-        </dd>
+        <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.IdEstadoEvento)
+        </dd>-->
     </dl>
+
+
     <h3>Servicios Contratados</h3>
 
-    
+    @foreach (var servicio in (IEnumerable<ServiciosVM>)ViewData["ListaServicios"])
+    {
+        <dt class="col-sm-2">
+            @Html.DisplayFor(model => servicio.Descripcion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => servicio.PrecioServicio);
+        </dd>
+    }
+
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Volver a la lista de Eventos</a>
+    <!--@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |-->
+    <a asp-action="Index">Volve a tus eventos</a>
 </div>

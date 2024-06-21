@@ -5,17 +5,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Servicios Disponibles</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Agregar nuevo servicio</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>
+            <!--<th>
                 @Html.DisplayNameFor(model => model.First().IdServicio)
-            </th>
+            </th>-->
             <th>
                 @Html.DisplayNameFor(model => model.First().Descripcion)
             </th>
@@ -29,9 +29,9 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
+                <!--<td>
                     @Html.DisplayFor(modelItem => item.IdServicio)
-                </td>
+                </td>-->
                 <td>
                     @Html.DisplayFor(modelItem => item.Descripcion)
                 </td>
@@ -40,7 +40,7 @@
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.IdServicio }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.IdServicio }) |
+                    <!--@Html.ActionLink("Details", "Details", new { id = item.IdServicio }) |-->
                     @Html.ActionLink("Delete", "Delete", new { id = item.IdServicio })
                 </td>
             </tr>

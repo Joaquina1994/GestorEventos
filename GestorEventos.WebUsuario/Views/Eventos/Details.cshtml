@@ -14,7 +14,8 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.EstadoEvento)
+            <label for="EstadoEvento">Estado</label>
+            @Html.HiddenFor(model => model.EstadoEvento)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.EstadoEvento)
@@ -26,31 +27,36 @@
             @Html.DisplayFor(model => model.IdEvento)
         </dd>-->
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.NombreEvento)
+            <label for="NombreEvento">Evento</label>
+            @Html.HiddenFor(model => model.NombreEvento)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.NombreEvento)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FechaEvento)
+            <label for="FechaEvento">Fecha</label>
+            @Html.HiddenFor(model => model.FechaEvento)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.FechaEvento)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CantidadPersonas)
+            <label for="CantidadPersonas">Cantidad de Personas</label>
+            @Html.HiddenFor(model => model.CantidadPersonas)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CantidadPersonas)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TipoEvento)
+            <label for="TipoEvento">Solteros o Solteras?</label>
+            @Html.HiddenFor(model => model.TipoEvento)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.TipoEvento)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.NombrePersonaAgasajada)
+            <label for="PersonaAgasajada">Agasajado</label>
+            @Html.HiddenFor(model => model.NombrePersonaAgasajada)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.NombrePersonaAgasajada)
@@ -97,5 +103,5 @@
 </div>
 <div>
     <!--@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |-->
-    <a asp-action="Index">Volve a tus eventos</a>
+    <a asp-action="Index">Volver a Eventos</a>
 </div>
