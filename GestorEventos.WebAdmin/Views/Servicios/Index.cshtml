@@ -17,10 +17,12 @@
                 @Html.DisplayNameFor(model => model.First().IdServicio)
             </th>-->
             <th>
-                @Html.DisplayNameFor(model => model.First().Descripcion)
+                <label>Servicio</label>
+                
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.First().PrecioServicio)
+                <label>Precio</label>
+                
             </th>
             <th></th>
         </tr>
@@ -39,9 +41,9 @@
                     @Html.DisplayFor(modelItem => item.PrecioServicio)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.IdServicio }) |
+                    @Html.ActionLink("Editar", "Edit", new { id = item.IdServicio }) |
                     <!--@Html.ActionLink("Details", "Details", new { id = item.IdServicio }) |-->
-                    @Html.ActionLink("Delete", "Delete", new { id = item.IdServicio })
+                    @Html.ActionLink("Borrar", "Delete", new { id = item.IdServicio })
                 </td>
             </tr>
         }
