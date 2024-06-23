@@ -63,3 +63,9 @@ th {
         background-color: #45a049; /* Verde más oscuro */
     }
 
+img.fixed-size {
+    width: 100px;
+    height: 100px;
+    object-fit: cover; /* Opcional: ajusta cómo la imagen se escala y recorta */
+}
+

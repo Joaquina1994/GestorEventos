@@ -13,6 +13,7 @@
                 <div class="mt-5">
                     <h3>Bienvenido, @User.Identity.Name</h3>
                     <p>¿Estás listo para organizar tu despedida?</p>
+                    <a href="@Url.Action("Create", "Eventos")" class="btn btn-primary rounded mr-2">Nuevo Evento</a>
                     <a href="@Url.Action("Index", "Eventos")" class="btn btn-primary rounded mr-2">Ver Mis Despedidas</a>
                     <a asp-controller="Login" asp-action="Logout" class="btn btn-outline-primary rounded">Logout</a>
                 </div>

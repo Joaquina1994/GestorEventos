@@ -5,6 +5,34 @@
       "PackagePath": "staticwebassets\\GestorEventos.WebUsuario.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\jota_\\source\\repos\\GestorEventos\\GestorEventos.WebUsuario\\wwwroot\\css\\imagenes\\agregar-producto.png",
+      "PackagePath": "staticwebassets\\css\\imagenes\\agregar-producto.png"
+    },
+    {
+      "Id": "C:\\Users\\jota_\\source\\repos\\GestorEventos\\GestorEventos.WebUsuario\\wwwroot\\css\\imagenes\\agregar-usuario.png",
+      "PackagePath": "staticwebassets\\css\\imagenes\\agregar-usuario.png"
+    },
+    {
+      "Id": "C:\\Users\\jota_\\source\\repos\\GestorEventos\\GestorEventos.WebUsuario\\wwwroot\\css\\imagenes\\archivo.png",
+      "PackagePath": "staticwebassets\\css\\imagenes\\archivo.png"
+    },
+    {
+      "Id": "C:\\Users\\jota_\\source\\repos\\GestorEventos\\GestorEventos.WebUsuario\\wwwroot\\css\\imagenes\\borrar.png",
+      "PackagePath": "staticwebassets\\css\\imagenes\\borrar.png"
+    },
+    {
+      "Id": "C:\\Users\\jota_\\source\\repos\\GestorEventos\\GestorEventos.WebUsuario\\wwwroot\\css\\imagenes\\boton-editar.png",
+      "PackagePath": "staticwebassets\\css\\imagenes\\boton-editar.png"
+    },
+    {
+      "Id": "C:\\Users\\jota_\\source\\repos\\GestorEventos\\GestorEventos.WebUsuario\\wwwroot\\css\\imagenes\\contrasena.png",
+      "PackagePath": "staticwebassets\\css\\imagenes\\contrasena.png"
+    },
+    {
+      "Id": "C:\\Users\\jota_\\source\\repos\\GestorEventos\\GestorEventos.WebUsuario\\wwwroot\\css\\imagenes\\fiesta.png",
+      "PackagePath": "staticwebassets\\css\\imagenes\\fiesta.png"
+    },
+    {
       "Id": "C:\\Users\\jota_\\source\\repos\\GestorEventos\\GestorEventos.WebUsuario\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

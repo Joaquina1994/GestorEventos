@@ -4,7 +4,9 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<div>
+    <img src="~/css/imagenes/agregar-usuario.png" alt="Borrar" class="fixed-size">
+</div>
 <h1>Nueva Despedida</h1>
 <hr />
 
@@ -12,7 +14,7 @@
     <div class="col-md-8 offset-md-2">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <h2>Ingrese su información</h2>
+            <h3>Ingrese su información</h3>
 
             <div class="form-group">
                 <input asp-for="IdEvento" class="form-control" type="hidden" value="0" />

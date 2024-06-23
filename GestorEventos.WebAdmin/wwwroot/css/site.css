@@ -121,3 +121,10 @@ button.accept-policy {
     line-height: 40px; /* Reducido el line-height para hacerlo más pequeño */
     font-size: 14px; /* Tamaño de fuente reducido para hacerlo más discreto */
 }
+/* wwwroot/css/site.css */
+img.fixed-size {
+    width: 100px;
+    height: 100px;
+    object-fit: cover; /* Opcional: ajusta cómo la imagen se escala y recorta */
+}
+
