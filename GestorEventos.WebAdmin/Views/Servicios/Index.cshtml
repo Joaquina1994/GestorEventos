@@ -8,44 +8,28 @@
 <h1>Servicios Disponibles</h1>
 
 <p>
-    <a asp-action="Create">Agregar nuevo servicio</a>
+    <a asp-action="Create" class="btn btn-primary">Agregar nuevo servicio</a>
 </p>
-<table class="table">
-    <thead>
+<table class="table table-striped table-bordered rounded">
+    <thead class="thead-dark">
         <tr>
-            <!--<th>
-                @Html.DisplayNameFor(model => model.First().IdServicio)
-            </th>-->
-            <th>
-                <label>Servicio</label>
-                
-            </th>
-            <th>
-                <label>Precio</label>
-                
-            </th>
-            <th></th>
+            <th>Servicio</th>
+            <th>Precio</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <!--<td>
-                    @Html.DisplayFor(modelItem => item.IdServicio)
-                </td>-->
+                <td>@Html.DisplayFor(modelItem => item.Descripcion)</td>
+                <td>@Html.DisplayFor(modelItem => item.PrecioServicio)</td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Descripcion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PrecioServicio)
-                </td>
-                <td>
-                    @Html.ActionLink("Editar", "Edit", new { id = item.IdServicio }) |
-                    <!--@Html.ActionLink("Details", "Details", new { id = item.IdServicio }) |-->
-                    @Html.ActionLink("Borrar", "Delete", new { id = item.IdServicio })
+                    <a asp-action="Edit" asp-route-id="@item.IdServicio" class="btn btn-warning btn-sm rounded">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@item.IdServicio" class="btn btn-danger btn-sm rounded">Borrar</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+

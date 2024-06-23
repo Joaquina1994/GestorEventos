@@ -10,87 +10,34 @@
     <a asp-action="Create">Nuevo Evento</a>
 </p>
 
-<table class="table">
-    <thead>
+<table class="table table-striped table-bordered rounded">
+    <thead class="thead-dark">
         <tr>
-            <!--<th>
-                @Html.DisplayNameFor(model => model.IdEvento)
-            </th>-->
-            <th>
-                <label>Evento</label>
-                <!--@Html.DisplayNameFor(model => model.NombreEvento)-->
-            </th>
-            <th>
-                <label>Fecha</label>
-                
-            </th>
-            <th>
-                <label>Cantidad de Personas</label>
-                
-            </th>
-            <th>
-                <label>Agasajado</label>
-                
-            </th>
-            <th>
-                <label>Solteros o Solteras?</label>
-                
-            </th>
-            <!--<th>
-                @Html.DisplayNameFor(model => model.Visible)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdUsuario)
-            </th>-->
-            <th>
-                <label>Estado</label>
-                
-            </th>
-            <!--<th>
-                @Html.DisplayNameFor(model => model.Borrado)
-            </th>-->
-            <th></th>
+            <th>Evento</th>
+            <th>Fecha</th>
+            <th>Cantidad de Personas</th>
+            <th>Agasajado</th>
+            <th>Solteros o Solteras?</th>
+            <th>Estado</th>
+            <th>Detalles</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <!--<td>
-                @Html.DisplayFor(modelItem => item.IdEvento)
-            </td>-->
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreEvento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaEvento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CantidadPersonas)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombrePersonaAgasajada)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoEvento)
-            </td>
-            <!--<td>
-                @Html.DisplayFor(modelItem => item.Visible)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdUsuario)
-            </td>-->
-            <td>
-                @Html.DisplayFor(modelItem => item.EstadoEvento)
-            </td>
-            <!--<td>
-                @Html.DisplayFor(modelItem => item.Borrado)
-            </td>-->
-            <td>
-                <!--@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |-->
-                @Html.ActionLink("Detalles", "Details", new { id=item.IdEvento }) 
-                <!--@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })-->
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.NombreEvento)</td>
+                <td>@Html.DisplayFor(modelItem => item.FechaEvento)</td>
+                <td>@Html.DisplayFor(modelItem => item.CantidadPersonas)</td>
+                <td>@Html.DisplayFor(modelItem => item.NombrePersonaAgasajada)</td>
+                <td>@Html.DisplayFor(modelItem => item.TipoEvento)</td>
+                <td>@Html.DisplayFor(modelItem => item.EstadoEvento)</td>
+                <td>
+                    @Html.ActionLink("Detalles", "Details", new { id = item.IdEvento }, new { @class = "btn btn-info btn-sm rounded" })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+

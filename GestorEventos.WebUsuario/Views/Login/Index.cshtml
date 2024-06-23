@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = "";
+    Layout = ""; // Agregar el layout adecuado si es necesario
 }
 <html lang="es">
 <head>
@@ -23,6 +23,8 @@
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
         }
 
             .login-container img {
@@ -47,6 +49,7 @@
             display: inline-flex;
             align-items: center;
             transition: background 0.3s;
+            text-decoration: none; /* Añadir para evitar subrayado en el enlace */
         }
 
             .google-btn img {
@@ -62,14 +65,13 @@
 </head>
 <body>
     <div class="login-container">
-        <img src="img/logo-solterout.png" alt="Logo" style="width:auto; height: auto">
-        
-<!--        <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" style="width: auto" />
-    -->    
-        <a class="google-btn" asp-controller="Login" asp-action="Login">
+        <img src="" alt="Logo" style="width: 100px; height: auto;">
+        <h1 class="display-4 mb-4">Despedidas de Solter@s</h1>
+        <p class="lead">¡Inicia sesión para organizar tu despedida!</p>
+        <a href="@Url.Action("Login", "Login")" class="google-btn">
+            
             Iniciar sesión con Google
         </a>
     </div>
- 
 </body>
 </html>
