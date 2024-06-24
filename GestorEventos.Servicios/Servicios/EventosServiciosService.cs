@@ -15,6 +15,7 @@ namespace GestorEventos.Servicios.Servicios
     public interface IEventosServiciosService
     {
         IEnumerable<EventosServicios> GetServiciosPorEvento(int IdEvento);
+        
         int PostNuevoEventoServicio(EventosServicios relacionEventoServicio);
     }
 
@@ -86,6 +87,8 @@ namespace GestorEventos.Servicios.Servicios
 
             }
         }
+       
+
 
     }
 }

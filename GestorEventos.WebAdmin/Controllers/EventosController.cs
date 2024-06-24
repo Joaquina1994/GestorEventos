@@ -14,12 +14,14 @@ namespace GestorEventos.WebUsuario.Controllers
         private IEventosService eventoService;
         private IPersonaService personaService;
        
+       
 
 
-        public EventosController(IEventosService _eventoService, IPersonaService _personaService )
+        public EventosController(IEventosService _eventoService, IPersonaService _personaService)
         {
             this.eventoService = _eventoService;
             this.personaService = _personaService;
+            
             
 
         }
@@ -33,10 +35,11 @@ namespace GestorEventos.WebUsuario.Controllers
         }
 
         // GET: EventosController/Details/5
-        public IActionResult Details(int id)
+        public ActionResult Details(int id)
         {
             return View();
         }
+
 
         // GET: EventosController/Create
         public ActionResult Create()

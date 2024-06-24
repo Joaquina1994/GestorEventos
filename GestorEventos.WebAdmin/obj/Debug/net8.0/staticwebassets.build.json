@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "dXWShF0tILqrNygCuezYre/Kb6VDhcwWbUbmDmDNc7o=",
+  "Hash": "xAryjnOudYbewxBRb+QGaFEXqq/hp0gv1moUCFJkNCM=",
   "Source": "GestorEventos.WebAdmin",
   "BasePath": "_content/GestorEventos.WebAdmin",
   "Mode": "Default",
@@ -148,6 +148,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\imagenes\\boton-editar.png"
+    },
+    {
+      "Identity": "C:\\Users\\jota_\\source\\repos\\GestorEventos\\GestorEventos.WebAdmin\\wwwroot\\css\\imagenes\\casa.png",
+      "SourceId": "GestorEventos.WebAdmin",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\jota_\\source\\repos\\GestorEventos\\GestorEventos.WebAdmin\\wwwroot\\",
+      "BasePath": "_content/GestorEventos.WebAdmin",
+      "RelativePath": "css/imagenes/casa.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\imagenes\\casa.png"
     },
     {
       "Identity": "C:\\Users\\jota_\\source\\repos\\GestorEventos\\GestorEventos.WebAdmin\\wwwroot\\css\\imagenes\\fiesta.png",

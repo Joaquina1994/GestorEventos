@@ -15,6 +15,7 @@ namespace GestorEventos.Servicios.Servicios
         IEnumerable<ServiciosVM> GetServicios();
         ServiciosVM GetServiciosPorId(int IdServicio);
         bool ModificarServicio(int IdServicio, ServiciosVM servicios);
+        
     }
 
     public class ServiciosService : IServiciosService
@@ -70,6 +71,9 @@ namespace GestorEventos.Servicios.Servicios
             }
             
         }
+
+
+
 
         public bool AgregarServicio(ServiciosVM servicios)
         {

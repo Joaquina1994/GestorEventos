@@ -25,6 +25,10 @@
       "PackagePath": "staticwebassets\\css\\imagenes\\boton-editar.png"
     },
     {
+      "Id": "C:\\Users\\jota_\\source\\repos\\GestorEventos\\GestorEventos.WebUsuario\\wwwroot\\css\\imagenes\\casa.png",
+      "PackagePath": "staticwebassets\\css\\imagenes\\casa.png"
+    },
+    {
       "Id": "C:\\Users\\jota_\\source\\repos\\GestorEventos\\GestorEventos.WebUsuario\\wwwroot\\css\\imagenes\\contrasena.png",
       "PackagePath": "staticwebassets\\css\\imagenes\\contrasena.png"
     },
