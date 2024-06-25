@@ -2,3 +2,122 @@
 /* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+/* Estilos generales */
+body[b-01os34motu] {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header[b-01os34motu] {
+    margin: 0;
+    padding: 0;
+}
+
+.container[b-01os34motu] {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    flex: 1;
+}
+
+h1[b-01os34motu], h2[b-01os34motu], h3[b-01os34motu] {
+    color: #0078d7; /* Azul */
+    margin-top: 0;
+}
+
+/* Barra de navegación */
+nav[b-01os34motu] {
+    background: linear-gradient(to right, #00f2fe, #4facfe);
+    color: white;
+    padding: 15px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+    nav a[b-01os34motu] {
+        color: white;
+        text-decoration: none;
+        margin: 0 20px;
+        font-weight: bold;
+        transition: color 0.3s, transform 0.3s;
+    }
+
+        nav a:hover[b-01os34motu] {
+            color: #e0f7fa;
+            transform: scale(1.1);
+        }
+
+/* Estilos para tablas */
+table[b-01os34motu] {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table[b-01os34motu], th[b-01os34motu], td[b-01os34motu] {
+    border: 1px solid #ddd;
+}
+
+th[b-01os34motu], td[b-01os34motu] {
+    padding: 12px;
+    text-align: center;
+}
+
+th[b-01os34motu] {
+    background-color: #00f2fe;
+    color: white;
+}
+
+tr:nth-child(even)[b-01os34motu] {
+    background-color: #f2f2f2;
+}
+
+img.fixed-size[b-01os34motu] {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+footer[b-01os34motu] {
+    background: linear-gradient(to right, #00f2fe, #4facfe);
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .container[b-01os34motu] {
+        width: 90%;
+        padding: 20px;
+    }
+
+    th[b-01os34motu], td[b-01os34motu] {
+        padding: 10px;
+    }
+
+    img.fixed-size[b-01os34motu] {
+        width: 100px;
+        height: 100px;
+    }
+
+    nav a[b-01os34motu] {
+        display: block;
+        margin: 10px 0;
+    }
+}
+

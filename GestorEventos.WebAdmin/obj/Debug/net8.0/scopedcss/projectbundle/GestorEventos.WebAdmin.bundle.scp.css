@@ -2,3 +2,122 @@
 /* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+/* Estilos generales */
+body[b-xdmjqg07o7] {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header[b-xdmjqg07o7] {
+    margin: 0;
+    padding: 0;
+}
+
+.container[b-xdmjqg07o7] {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    flex: 1;
+}
+
+h1[b-xdmjqg07o7], h2[b-xdmjqg07o7], h3[b-xdmjqg07o7] {
+    color: #0078d7; /* Azul */
+    margin-top: 0;
+}
+
+/* Barra de navegación */
+nav[b-xdmjqg07o7] {
+    background: linear-gradient(to right, #00f2fe, #4facfe);
+    color: white;
+    padding: 15px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+    nav a[b-xdmjqg07o7] {
+        color: white;
+        text-decoration: none;
+        margin: 0 20px;
+        font-weight: bold;
+        transition: color 0.3s, transform 0.3s;
+    }
+
+        nav a:hover[b-xdmjqg07o7] {
+            color: #e0f7fa;
+            transform: scale(1.1);
+        }
+
+/* Estilos para tablas */
+table[b-xdmjqg07o7] {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table[b-xdmjqg07o7], th[b-xdmjqg07o7], td[b-xdmjqg07o7] {
+    border: 1px solid #ddd;
+}
+
+th[b-xdmjqg07o7], td[b-xdmjqg07o7] {
+    padding: 12px;
+    text-align: center;
+}
+
+th[b-xdmjqg07o7] {
+    background-color: #00f2fe;
+    color: white;
+}
+
+tr:nth-child(even)[b-xdmjqg07o7] {
+    background-color: #f2f2f2;
+}
+
+img.fixed-size[b-xdmjqg07o7] {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+footer[b-xdmjqg07o7] {
+    background: linear-gradient(to right, #00f2fe, #4facfe);
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .container[b-xdmjqg07o7] {
+        width: 90%;
+        padding: 20px;
+    }
+
+    th[b-xdmjqg07o7], td[b-xdmjqg07o7] {
+        padding: 10px;
+    }
+
+    img.fixed-size[b-xdmjqg07o7] {
+        width: 100px;
+        height: 100px;
+    }
+
+    nav a[b-xdmjqg07o7] {
+        display: block;
+        margin: 10px 0;
+    }
+}
+

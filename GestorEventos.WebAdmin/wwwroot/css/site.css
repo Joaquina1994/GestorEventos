@@ -1,13 +1,13 @@
 /* Estilos generales */
 body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to right, #f857a6, #ff5858);
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
     color: #333;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Asegura que el cuerpo ocupe al menos el alto completo de la pantalla */
+    min-height: 100vh;
 }
 
 header {
@@ -19,22 +19,22 @@ header {
     width: 80%;
     margin: 20px auto;
     background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    flex: 1; /* Ajusta para que el contenido principal ocupe el espacio restante */
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    flex: 1;
 }
 
 h1, h2, h3 {
-    color: #ff4081; /* Rosa */
+    color: #0078d7;
     margin-top: 0;
 }
 
 /* Barra de navegación */
 nav {
-    background: linear-gradient(to right, #ff5858, #f857a6);
+    background: linear-gradient(to right, #00f2fe, #4facfe);
     color: white;
-    padding: 10px 0;
+    padding: 15px 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
@@ -42,13 +42,14 @@ nav {
     nav a {
         color: white;
         text-decoration: none;
-        margin: 0 15px;
+        margin: 0 20px;
         font-weight: bold;
-        transition: color 0.3s;
+        transition: color 0.3s, transform 0.3s;
     }
 
         nav a:hover {
-            color: #ffecd2;
+            color: #e0f7fa;
+            transform: scale(1.1);
         }
 
 /* Estilos para tablas */
@@ -63,12 +64,12 @@ table, th, td {
 }
 
 th, td {
-    padding: 10px;
+    padding: 12px;
     text-align: center;
 }
 
 th {
-    background-color: #f857a6;
+    background-color: #00f2fe;
     color: white;
 }
 
@@ -76,36 +77,39 @@ tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
+/* Ajuste de tamaño de imagen */
 img.fixed-size {
-    width: 100px;
-    height: 100px;
-    object-fit: cover; /* Ajusta cómo la imagen se escala y recorta */
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 footer {
-    background: linear-gradient(to right, #ff5858, #f857a6);
+    background: linear-gradient(to right, #00f2fe, #4facfe);
     color: white;
     text-align: center;
-    padding: 10px 0;
+    padding: 15px 0;
     width: 100%;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-    flex-shrink: 0; /* Evita que el footer se encoga */
+    flex-shrink: 0;
 }
 
 /* Responsivo */
 @media (max-width: 768px) {
     .container {
         width: 90%;
-        padding: 15px;
+        padding: 20px;
     }
 
     th, td {
-        padding: 8px;
+        padding: 10px;
     }
 
     img.fixed-size {
-        width: 80px;
-        height: 80px;
+        width: 100px;
+        height: 100px;
     }
 
     nav a {

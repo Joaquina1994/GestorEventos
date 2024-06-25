@@ -37,6 +37,14 @@
       "PackagePath": "staticwebassets\\css\\imagenes\\fiesta.png"
     },
     {
+      "Id": "C:\\Users\\jota_\\source\\repos\\GestorEventos\\GestorEventos.WebUsuario\\wwwroot\\css\\imagenes\\soltera.png",
+      "PackagePath": "staticwebassets\\css\\imagenes\\soltera.png"
+    },
+    {
+      "Id": "C:\\Users\\jota_\\source\\repos\\GestorEventos\\GestorEventos.WebUsuario\\wwwroot\\css\\imagenes\\soltero.png",
+      "PackagePath": "staticwebassets\\css\\imagenes\\soltero.png"
+    },
+    {
       "Id": "C:\\Users\\jota_\\source\\repos\\GestorEventos\\GestorEventos.WebUsuario\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
